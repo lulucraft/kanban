@@ -1,0 +1,70 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	background: url("../images/background.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+
+small {
+	width: 100%;
+    margin: auto;
+    display: block;
+}
+
+
+form {
+	margin: 10px;
+	width: 300px;
+}
+
+form label {
+	display: block;
+	padding-bottom: 5px;
+}
+
+form input {
+	padding: 2px 5px;
+}
+
+form input[type=text] {
+	min-width: 90%;
+}
+
+form h2 {
+	margin-top: 0;
+}
+
+
+#center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	padding: 10px;
+	transform: translate(-50%, -50%);
+	border: 5px solid #ffffff;
+	background-color: #e2e2e2b3;
+}
+
+.center {
+	text-align: center;
+}
+
+.form-item {
+	margin: auto;
+	width: fit-content;
+}
+
+.form-message {
+	color: red;
+}
+
+
+.kanban-table {
+	border: 8px solid #7e5f43;
+	height: 90%;
+	width: 80%;
+}
