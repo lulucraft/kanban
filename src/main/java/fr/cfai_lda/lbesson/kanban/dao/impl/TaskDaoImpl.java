@@ -1,7 +1,6 @@
 package fr.cfai_lda.lbesson.kanban.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.cfai_lda.lbesson.kanban.business.Task;
-import fr.cfai_lda.lbesson.kanban.business.TaskHistory;
 import fr.cfai_lda.lbesson.kanban.dao.TaskDao;
 import fr.cfai_lda.lbesson.kanban.dao.database.DatabaseConnection;
 import fr.cfai_lda.lbesson.kanban.dao.database.Query;
@@ -45,22 +43,31 @@ public class TaskDaoImpl implements TaskDao {
 		return task;
 	}
 
+//	@Override
+//	public void moveTask(Task task, TaskHistory taskHistory) throws SQLException {
+//		PreparedStatement ps_task_history = connection.prepareStatement(Query.ADD_TASK_HISTORY);
+//		ps_task_history.setDate(1, new Date(System.currentTimeMillis()));
+//		ps_task_history.setLong(2, task.getId());
+//		ps_task_history.setLong(3, taskHistory.getOldTaskProgress().getId());
+//		ps_task_history.setLong(4, taskHistory.getTaskUpdateUser().getId());
+//		ps_task_history.executeUpdate();
+//
+//		PreparedStatement ps_task = connection.prepareStatement(Query.UPDATE_TASK);
+//		ps_task.setLong(1, task.getTaskProgress().getId());
+//		ps_task.executeUpdate();
+//
+//		// Get generate new id
+////		ResultSet rs = ps_task_history.getGeneratedKeys();
+////		rs.next();
+////		ps_task_history.setLong(1, rs.getLong(1));
+//	}
+
 	@Override
-	public void moveTask(Task task, TaskHistory taskHistory) throws SQLException {
-		PreparedStatement ps_task_history = connection.prepareStatement(Query.ADD_TASK_HISTORY);
-		ps_task_history.setDate(1, new Date(System.currentTimeMillis()));
-		ps_task_history.setLong(2, task.getId());
-		ps_task_history.setLong(3, taskHistory.getOldTaskProgress().getId());
-		ps_task_history.executeUpdate();
-
-		PreparedStatement ps_task = connection.prepareStatement(Query.UPDATE_TASK);
-		ps_task.setLong(1, task.getTaskProgress().getId());
-		ps_task.executeUpdate();
-
-		// Get generate new id
-//		ResultSet rs = ps_task_history.getGeneratedKeys();
-//		rs.next();
-//		ps_task_history.setLong(1, rs.getLong(1));
+	public void updateTask(Task task) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(Query.UPDATE_TASK);
+		ps.setLong(1, task.getTaskProgress().getId());
+		ps.setLong(2, task.getId());
+		ps.executeUpdate();
 	}
 
 	@Override

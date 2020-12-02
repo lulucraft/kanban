@@ -13,10 +13,31 @@
   		<script>
   			$( function() {
     			$( ".draggable" ).draggable({
-    				containment: "tbody tr",
-    				stop: function(event, ui) {
-    					alert($(this).attr("shape"));
-    				}
+    				containment: "tbody tr"
+    				/* ,stop: function( event, ui ) {
+    					alert($(this).children(".task_id").attr("value"));
+    			    } */
+    			});
+    			$( ".droppable" ).droppable({
+    				drop: function( event, ui ) {
+    					//alert(ui.helper.find("input.task_id").attr("value"));
+    					//alert($(this).find("input.task_id").attr("value"));
+    					//alert($(this).find("input.taskprogress_id").attr("value"));
+
+    					var xhr = new XMLHttpRequest();
+    					xhr.open("POST", 'kanban', true);
+    					xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    					xhr.send(
+    							"move=" + ui.helper.find("input.task_id").attr("value") +
+    							"&progress=" + $(this).find("input.taskprogress_id").attr("value")
+    					);
+    			        $( this )
+    			          .find( "input.task_id" )
+    			            .html( "Dropped!" );
+    			    }
+    				/*stop: function(event, ui) {
+    					alert($(this).children(".taskid").attr("value"));
+    				} */
     			});
     			// Getter
 //     			var cursor = $( ".draggable" ).draggable( "option", "cursor" );
@@ -34,24 +55,30 @@
        				<thead>
 						<tr>
 							<c:forEach items="${taskProgress}" var="taskProgress">
-								<th>${taskProgress.progressLabel}</th>
+								<th>
+									<p>${taskProgress.progressLabel}</p>
+								</th>
 							</c:forEach>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td></td>
-							<td></td>
-							<td>
-							<c:forEach items="${tasks}" var="task">
-								<area shape="rect" class="draggable" />
-									<p>${task.name}</p>
-<!-- 								</area>class="kanban-table-body-column" -->
+							<c:forEach items="${taskProgress}" var="taskProgress">
+								<td class="droppable ui-widget-header">
+									<input type="hidden" class="taskprogress_id" value="${taskProgress.id}">
+									<p>Drop here</p>
+									<c:forEach items="${tasks}" var="task">
+										<c:if test="${taskProgress.id == task.taskProgress.id }">
+											<div class="draggable ui-widget-content">
+												<input type="hidden" class="task_id" value="${task.id}">
+												<p>${task.name}</p>
+											</div>
+										</c:if>
+									</c:forEach>
+								</td>
 							</c:forEach>
-							</td>
 						</tr>
 					</tbody>
-<!--        				<div class="kanban-table-column"></div> -->
        			</table>
         	</c:if>
         </div>

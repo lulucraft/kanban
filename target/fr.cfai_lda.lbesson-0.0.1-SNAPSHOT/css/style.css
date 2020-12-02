@@ -11,8 +11,8 @@ html {
 
 small {
 	width: 100%;
-    margin: auto;
-    display: block;
+	margin: auto;
+	display: block;
 }
 
 
@@ -43,14 +43,17 @@ form h2 {
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	padding: 10px;
 	transform: translate(-50%, -50%);
-	border: 5px solid #ffffff;
-	background-color: #e2e2e2b3;
 }
 
 .center {
 	text-align: center;
+}
+
+.frame {
+	padding: 10px;
+	border: 5px solid #ffffff;
+	background-color: #e2e2e2b3;
 }
 
 .form-item {
@@ -64,7 +67,44 @@ form h2 {
 
 
 .kanban-table {
+	background-color: #393939;
 	border: 8px solid #7e5f43;
-	height: 90%;
-	width: 80%;
+/* 	height: 90%; */
+/* 	width: 100%; */
+	color: white;
+	padding: 15px;
+	border-spacing: 0;
+}
+
+.kanban-table th,
+.kanban-table td {
+	width: 500px;
+/* 	height: 100%; */
+	border-right: 2px solid white;
+	text-align: center;
+}
+
+.kanban-table th {
+	border-bottom: 2px solid white;
+	height: 50px;
+}
+
+.kanban-table th:last-child,
+.kanban-table td:last-child {
+	border-right: none;
+}
+
+.kanban-table td {
+	height: 600px;
+}
+
+.kanban-table caption {
+	background: firebrick;
+}
+
+.draggable {
+	cursor: grab;
+	width: 50px;
+	height: 50px;
+	padding: 0.5em;
 }

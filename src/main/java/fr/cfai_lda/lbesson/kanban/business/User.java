@@ -19,8 +19,6 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
-		System.out.println(id);
-		System.out.println(hashedPassword);
 		this.hashedPassword = hashedPassword;
 		this.accountType = accountType;
 	}

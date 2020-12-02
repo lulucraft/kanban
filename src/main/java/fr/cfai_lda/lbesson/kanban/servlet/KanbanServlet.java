@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.cfai_lda.lbesson.kanban.business.TaskHistory;
 import fr.cfai_lda.lbesson.kanban.business.TaskProgress;
+import fr.cfai_lda.lbesson.kanban.business.User;
 import fr.cfai_lda.lbesson.kanban.controller.TaskController;
 import fr.cfai_lda.lbesson.kanban.controller.TaskProgressController;
 import fr.cfai_lda.lbesson.kanban.controller.UserController;
+import fr.cfai_lda.lbesson.kanban.dao.impl.TaskDaoImpl;
+import fr.cfai_lda.lbesson.kanban.dao.impl.TaskHistoryDaoImpl;
 import fr.cfai_lda.lbesson.kanban.helper.AuthHelper;
 
 /**
@@ -40,10 +44,24 @@ public class KanbanServlet extends HttpServlet {
 				req.setAttribute("taskProgress", Arrays.asList(new TaskProgress("")));
 				return;
 			}
+			// If user connected
+			User user = UserController.getUser((long) req.getSession().getAttribute("user_id"));
+			req.setAttribute("username", user.getUsername());
 
-			// If connected
-			String username = UserController.getUser((long) req.getSession().getAttribute("user_id")).getUsername();
-			req.setAttribute("username", username);
+			// Move request
+			if (req.getParameter("move") != null) {
+				// Move task
+				TaskHistory taskHistory = TaskController.moveTask(req.getParameter("move"),
+						req.getParameter("progress"), user);
+				if (taskHistory == null)
+					return;
+
+				// Save new task progress in database
+				new TaskDaoImpl().updateTask(taskHistory.getTask());
+				// Save task history in database
+				new TaskHistoryDaoImpl().createTaskHistory(taskHistory);
+			}
+
 			req.setAttribute("taskProgress", TaskProgressController.getAllTaskProgress());
 			req.setAttribute("tasks", TaskController.getAllTasks());
 

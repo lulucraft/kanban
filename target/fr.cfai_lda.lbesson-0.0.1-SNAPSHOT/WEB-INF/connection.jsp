@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="/kanban/css/style.css">
     </head>
     <body>
-    	<div id="center">
+    	<div id="center" class="frame">
         	<form action="connection" method="POST" id="auth-form">
         		<h2>Page de connexion</h2>
         		<div class="form-item">

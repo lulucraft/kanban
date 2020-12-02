@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="/kanban/css/style.css">
     </head>
     <body>
-    	<div id="center">
+    	<div id="center" class="frame">
     		<h2>Bienvenue sur Kanban !</h2>
     		<small class="center"><a href="connection">se connecter</a></small>
         </div>

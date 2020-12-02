@@ -132,7 +132,6 @@ public class DataController {
 
 		// Create default users in database
 		if (UserController.getAllUsers().isEmpty()) {
-			System.out.println("User creation");
 			UserDao userDao = new UserDaoImpl();
 			userDao.createUser(UserController.createUser(null, "Lucas", "Besson", AuthController.hashPassword("lbesson"), "123456",
 					RankController.getRank(5L)));

@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="/kanban/css/style.css">
     </head>
     <body>
-    	<div id="center">
+    	<div id="center" class="frame">
     		<h2><span>${username}</span>, vous êtes connecté(e) à votre espace utilisateur !</h2>
     		<div class="center"><a href="kanban">Accéder à Kanban</a></div>
         </div>
