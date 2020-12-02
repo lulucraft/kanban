@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 01 déc. 2020 à 17:00
+-- Généré le :  mer. 02 déc. 2020 à 00:17
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `task` (
 --
 
 INSERT INTO `task` (`id`, `name`, `creation_date`, `account_id`, `tasktype_id`, `taskprogress_id`) VALUES
-(1, 'tachetest', '2020-11-26', 1, 5, 9);
+(1, 'tachetest', '2020-11-26', 1, 5, 11);
 
 -- --------------------------------------------------------
 
@@ -136,7 +136,14 @@ CREATE TABLE IF NOT EXISTS `taskhistory` (
   KEY `taskhistory_taskprogress_id_FK` (`taskprogress_id`),
   KEY `taskhistory_task_id_FK` (`task_id`),
   KEY `user_id_FK` (`user_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `taskhistory`
+--
+
+INSERT INTO `taskhistory` (`id`, `moving_date`, `task_id`, `taskprogress_id`, `user_id`) VALUES
+(8, '2020-12-02', 1, 11, 4);
 
 -- --------------------------------------------------------
 
@@ -149,16 +156,17 @@ CREATE TABLE IF NOT EXISTS `taskprogress` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `label` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `taskprogress`
 --
 
 INSERT INTO `taskprogress` (`id`, `label`) VALUES
-(9, 'To-Do'),
-(10, 'Work-In-Progress'),
-(11, 'Validate');
+(9, 'To Do'),
+(10, 'In Progress'),
+(11, 'To Verify'),
+(12, 'Done');
 
 -- --------------------------------------------------------
 
@@ -206,7 +214,7 @@ ALTER TABLE `task`
 ALTER TABLE `taskhistory`
   ADD CONSTRAINT `account_user_id_FK` FOREIGN KEY (`user_id`) REFERENCES `account` (`id`),
   ADD CONSTRAINT `taskhistory_task_id_FK` FOREIGN KEY (`task_id`) REFERENCES `task` (`id`),
-  ADD CONSTRAINT `taskhistory_taskprogress_id_FK` FOREIGN KEY (`taskprogress_id`) REFERENCES `taskhistory` (`id`);
+  ADD CONSTRAINT `taskhistory_taskprogress_id_FK` FOREIGN KEY (`taskprogress_id`) REFERENCES `taskprogress` (`id`);
 
 --
 -- Contraintes pour la table `tasktype`
