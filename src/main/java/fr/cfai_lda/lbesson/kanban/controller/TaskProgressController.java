@@ -22,6 +22,12 @@ public class TaskProgressController {
 		return null;
 	}
 
+	public static TaskProgress getFirstTaskProgress() {
+		if (taskProgress.isEmpty()) return null;
+
+		return taskProgress.get(0);
+	}
+
 	public static void createTaskProgress(Long id, String progressLabel) {
 		// TaskProgress already exists
 		if (getTaskProgress(id) != null) return;

@@ -1,10 +1,13 @@
 package fr.cfai_lda.lbesson.kanban.business;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class TaskType {
 	//FEATURE(Color.blue), BUG(Color.orange), IMPROVEMENT(Color.green), EXPLORATION_TASK(Color.magenta);
 
 	private Long id;
 	private String label;
+	@JsonIgnore
 	private Color color;
 
 	//private static long id_max = 0L;
@@ -30,6 +33,7 @@ public class TaskType {
 	/**
 	 * @return the id
 	 */
+	@JsonIgnore
 	public Long getId() {
 		return id;
 	}

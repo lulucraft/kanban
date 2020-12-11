@@ -1,5 +1,7 @@
 package fr.cfai_lda.lbesson.kanban.business;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class User {
 	private Long id;
 	private String firstName;
@@ -37,6 +39,7 @@ public class User {
 	/**
 	 * @return the id
 	 */
+	@JsonIgnore
 	public Long getId() {
 		return id;
 	}
@@ -80,6 +83,7 @@ public class User {
 	/**
 	 * @return the username
 	 */
+	@JsonIgnore
 	public String getUsername() {
 		return username;
 	}
@@ -94,6 +98,7 @@ public class User {
 	/**
 	 * @return the password
 	 */
+	@JsonIgnore
 	public String getPassword() {
 		return hashedPassword;
 	}
@@ -109,6 +114,7 @@ public class User {
 	/**
 	 * @return the accountType
 	 */
+	@JsonIgnore
 	public Rank getAccountType() {
 		return accountType;
 	}
@@ -123,6 +129,7 @@ public class User {
 	/**
 	 * @return the isConnected
 	 */
+	@JsonIgnore
 	public boolean isConnected() {
 		return isConnected;
 	}
@@ -134,6 +141,10 @@ public class User {
 		this.isConnected = isConnected;
 	}
 
+	/**
+	 * @return connection token
+	 */
+	@JsonIgnore
 	public Token getToken() {
 		return token;
 	}
@@ -144,8 +155,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [firstName=" + firstName + ", lastName=" + lastName + ", username=" + username + ", password="
-				+ hashedPassword + ", accountType=" + accountType + ", isConnected=" + isConnected + "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", hashedPassword=" + hashedPassword + ", accountType=" + accountType + ", isConnected=" + isConnected
+				+ ", token=" + token + "]";
 	}
 
 }

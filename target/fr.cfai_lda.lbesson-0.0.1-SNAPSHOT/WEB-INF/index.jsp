@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="/kanban/css/style.css">
     </head>
-    <body>
+    <body class="kanban-background">
     	<div id="center" class="frame">
     		<h2>Bienvenue sur Kanban !</h2>
     		<small class="center"><a href="connection">se connecter</a></small>

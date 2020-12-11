@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Task {
 	private Long id;
 	private String name;
@@ -11,6 +13,7 @@ public class Task {
 	private User taskOwner;
 	private TaskType taskType;
 	private TaskProgress taskProgress;
+	@JsonIgnore
 	private List<TaskHistory> tasks = new ArrayList<>();
 
 	//private static long id_max = 0L;
@@ -46,6 +49,7 @@ public class Task {
 	/**
 	 * @return the id
 	 */
+	@JsonIgnore
 	public Long getId() {
 		return id;
 	}

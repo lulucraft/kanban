@@ -35,7 +35,9 @@ public class TaskController {
 		// Task already exists
 		if (task != null) return task;
 
-		tasks.add(new Task(id, taskName, taskType, taskProgress, creationDate, taskOwner));
+		task = new Task(id, taskName, taskType, taskProgress, creationDate, taskOwner);
+		tasks.add(task);
+
 		return task;
 	}
 
@@ -68,6 +70,21 @@ public class TaskController {
 
 		// Create taskHistory
 		return TaskHistoryController.createTaskHistory(task, oldTaskProgress, taskUpdateUser);
+	}
+
+	public static Task createTask(String taskName, long taskTypeId, User user) {
+		TaskProgress taskProgress = TaskProgressController.getFirstTaskProgress();
+		if (taskProgress == null) return null;
+
+		// Get task type from id
+		TaskType taskType = TaskTypeController.getTaskType(taskTypeId);
+		if (taskType == null) return null;
+
+		// Create new task
+		Task task = new Task(taskName, taskType, taskProgress, new Date(System.currentTimeMillis()), user);
+		tasks.add(task);
+
+		return task;
 	}
 
 }

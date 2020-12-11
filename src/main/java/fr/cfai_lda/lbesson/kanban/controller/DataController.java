@@ -1,7 +1,6 @@
 package fr.cfai_lda.lbesson.kanban.controller;
 
 import java.sql.SQLException;
-import java.util.Date;
 
 import fr.cfai_lda.lbesson.kanban.business.Color;
 import fr.cfai_lda.lbesson.kanban.business.RGBColor;
@@ -12,10 +11,8 @@ import fr.cfai_lda.lbesson.kanban.business.TaskType;
 import fr.cfai_lda.lbesson.kanban.business.User;
 import fr.cfai_lda.lbesson.kanban.dao.ColorDao;
 import fr.cfai_lda.lbesson.kanban.dao.RankDao;
-import fr.cfai_lda.lbesson.kanban.dao.TaskDao;
 import fr.cfai_lda.lbesson.kanban.dao.TaskProgressDao;
 import fr.cfai_lda.lbesson.kanban.dao.TaskTypeDao;
-import fr.cfai_lda.lbesson.kanban.dao.UserDao;
 import fr.cfai_lda.lbesson.kanban.dao.impl.ColorDaoImpl;
 import fr.cfai_lda.lbesson.kanban.dao.impl.RankDaoImpl;
 import fr.cfai_lda.lbesson.kanban.dao.impl.TaskDaoImpl;
@@ -70,7 +67,7 @@ public class DataController {
 	 */
 	private static void loadColors() throws SQLException {
 		for (Color c : new ColorDaoImpl().getAllColors()) {
-			ColorController.createColor(c.getId(), c.getName(), c.getRgbCode());
+			ColorController.createColor(c.getId(), c.getName(), c.getRGBColor());
 		}
 
 		// Create default colors in database
@@ -107,7 +104,7 @@ public class DataController {
 	 */
 	public static void loadTaskProgress() throws SQLException {
 		for (TaskProgress tp : new TaskProgressDaoImpl().getAllTaskProgress()) {
-			TaskProgressController.createTaskProgress(tp.getId(), tp.getProgressLabel());
+			TaskProgressController.createTaskProgress(tp.getId(), tp.getLabel());
 		}
 
 		// Create default taskprogress in database
@@ -131,13 +128,13 @@ public class DataController {
 		}
 
 		// Create default users in database
-		if (UserController.getAllUsers().isEmpty()) {
-			UserDao userDao = new UserDaoImpl();
-			userDao.createUser(UserController.createUser(null, "Lucas", "Besson", AuthController.hashPassword("lbesson"), "123456",
-					RankController.getRank(5L)));
-			userDao.createUser(UserController.createUser(null, "admintest", "test", AuthController.hashPassword("admin"), "root",
-					RankController.getRank(6L)));
-		}
+//		if (UserController.getAllUsers().isEmpty()) {
+//			UserDao userDao = new UserDaoImpl();
+//			userDao.createUser(UserController.createUser(null, "Lucas", "Besson", AuthController.hashPassword("lbesson"), "123456",
+//					RankController.getRank(5L)));
+//			userDao.createUser(UserController.createUser(null, "admintest", "test", AuthController.hashPassword("admin"), "root",
+//					RankController.getRank(6L)));
+//		}
 	}
 
 	/**
@@ -152,12 +149,12 @@ public class DataController {
 		}
 
 		// Create default tasks in database
-		if (TaskController.getAllTasks().isEmpty()) {
-			TaskDao taskDao = new TaskDaoImpl();
-			taskDao.createTask(
-					new Task("tachetest", TaskTypeController.getTaskType(5L), TaskProgressController.getTaskProgress(9),
-							new Date(System.currentTimeMillis()), UserController.getUser("lbesson")));
-		}
+//		if (TaskController.getAllTasks().isEmpty()) {
+//			TaskDao taskDao = new TaskDaoImpl();
+//			taskDao.createTask(
+//					new Task("tachetest", TaskTypeController.getTaskType(5L), TaskProgressController.getTaskProgress(9),
+//							new Date(System.currentTimeMillis()), UserController.getUser("lbesson")));
+//		}
 	}
 
 }

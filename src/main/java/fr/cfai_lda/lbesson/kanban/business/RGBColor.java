@@ -28,7 +28,7 @@ public class RGBColor {
 		return getRed() + ", " + getGreen() + ", " + getBlue();
 	}
 
-	public String getCssText() {
+	public String getCSSText() {
 		return "rgb(" + toString() + ")";
 	}
 

@@ -4,17 +4,17 @@ public class Color {
 
 	private Long id;
 	private String name;
-	private RGBColor rgbCode;
+	private RGBColor rgbColor;
 
-	public Color(String name, RGBColor rgbCode) {
-		this(null, name, rgbCode);
+	public Color(String name, RGBColor rgbColor) {
+		this(null, name, rgbColor);
 	}
 
-	public Color(Long id, String name, RGBColor rgbCode) {
+	public Color(Long id, String name, RGBColor rgbColor) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.rgbCode = rgbCode;
+		this.rgbColor = rgbColor;
 	}
 
 	/**
@@ -48,20 +48,20 @@ public class Color {
 	/**
 	 * @return the rgbCode
 	 */
-	public RGBColor getRgbCode() {
-		return rgbCode;
+	public RGBColor getRGBColor() {
+		return rgbColor;
 	}
 
 	/**
 	 * @param rgbCode the rgbCode to set
 	 */
-	public void setRgbCode(RGBColor rgbCode) {
-		this.rgbCode = rgbCode;
+	public void setRGBColor(RGBColor rgbCode) {
+		this.rgbColor = rgbCode;
 	}
 
 	@Override
 	public String toString() {
-		return "Color [id=" + id + ", name=" + name + ", rgbCode=" + rgbCode + "]";
+		return "Color [id=" + id + ", name=" + name + ", rgbColor=" + rgbColor + "]";
 	}
 
 }

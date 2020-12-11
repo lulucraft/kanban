@@ -41,7 +41,7 @@ public class ColorController {
 	 * @return rgb format
 	 */
 	public static RGBColor translateToRGBColor(Color color) {
-		String[] split = color.getRgbCode().getString().trim().split(",");
+		String[] split = color.getRGBColor().getString().trim().split(",");
 		return new RGBColor(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]));
 	}
 

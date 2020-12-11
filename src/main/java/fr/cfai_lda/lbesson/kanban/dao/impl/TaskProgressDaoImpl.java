@@ -28,7 +28,7 @@ public class TaskProgressDaoImpl implements TaskProgressDao {
 	@Override
 	public TaskProgress createTaskProgress(TaskProgress taskProgress) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(Query.ADD_TASK_PROGRESS, Statement.RETURN_GENERATED_KEYS);
-		ps.setString(1, taskProgress.getProgressLabel());
+		ps.setString(1, taskProgress.getLabel());
 		ps.executeUpdate();
 
 		// Get generate new id

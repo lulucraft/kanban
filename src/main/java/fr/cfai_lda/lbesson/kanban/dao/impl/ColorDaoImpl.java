@@ -30,7 +30,7 @@ public class ColorDaoImpl implements ColorDao {
 	public Color createColor(Color color) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(Query.ADD_COLOR, Statement.RETURN_GENERATED_KEYS);
 		ps.setString(1, color.getName());
-		ps.setString(2, color.getRgbCode().getString());
+		ps.setString(2, color.getRGBColor().getString());
 		ps.executeUpdate();
 
 		// Get generate new id
