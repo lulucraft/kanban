@@ -46,6 +46,10 @@
       				 });
       			});
 
+      			String.prototype.htmlEscape = function() {
+      				return $('<div/>').text(this.toString()).html();
+      			};
+
     			/*stop: function(event, ui) {
     				alert($(this).children(".taskid").attr("value"));
     			} */
@@ -72,35 +76,52 @@
 						);
 
 				alert('Tâche ajoutée');
-				refresh();
+				summonTask();
+			}
+
+  			function summonTask() {
+  				div = document.createElement("div");
+  				document.body.appendChild(div);
 			}
 
   			function refresh() {
 				document.location.reload();
 			}
  
-  			function showTaskDetails() {
+  			function showTaskDetails(e) {
   				// Show modal
   				document.getElementById('task-details-dialog').showModal();
+
+  				getTaskDetails(e);
   			}
 
-  			function getTaskDetails() {
+  			function getTaskDetails(e) {
   				var taskId = e.getElementsByClassName('task_id')[0];
   				if (taskId == null) return;
-  				alert(taskId);
 
   				// Get task id
   				taskId = taskId.value;
 
   				var xhr = new XMLHttpRequest();
   				xhr.open("POST", 'api', true);
-  				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//   				xhr.setRequestHeader("Content-Type", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+   				xhr.overrideMimeType("application/json");
+  				xhr.onload = function() {
+  					if (xhr.readyState == 4) {// Fully loaded data
+  						if (xhr.readyState == 4) { // Http state == Done
+							var jsonResponse = JSON.parse(xhr.responseText);
+
+							document.getElementById('task-details-task_name').innerHTML = jsonResponse.name.htmlEscape();
+							document.getElementById('task-details-task_date').innerHTML = jsonResponse.creationDate;
+							document.getElementById('task-details-task_owner_firstname').innerHTML = 'Prénom du créateur : ' + jsonResponse.taskOwner.firstName.htmlEscape();
+							document.getElementById('task-details-task_owner_lastname').innerHTML = 'Nom de famille du créateur : ' + jsonResponse.taskOwner.lastName.htmlEscape();
+							document.getElementById('task-details-task_type').innerHTML = 'Type de tâche : ' + jsonResponse.taskType.label.htmlEscape();
+							document.getElementById('task-details-task_progress').innerHTML = 'Progression : ' + jsonResponse.taskProgress.label.htmlEscape();
+  						}
+  					}
+  				};
 				xhr.send("taskid=" + taskId);
-
-				alert(xhr.response);
-				var decoded = JSON.parse(xhr.response);
-
-				document.getElementById('task-details-task_name').innerHTML = decoded.name;
 			}
 
 //   			function changeTaskType() {
@@ -129,7 +150,7 @@
 						<tr>
 							<c:forEach items="${taskProgress}" var="taskProgress">
 								<th>
-									<p>${fn:escapeXml(taskProgress.progressLabel)}</p>
+									<p>${fn:escapeXml(taskProgress.label)}</p>
 								</th>
 							</c:forEach>
 						</tr>
@@ -176,7 +197,7 @@
 
 				<!-- Task details dialog -->
 				<dialog id="task-details-dialog">
-					<div class="task-details" onclick="getTaskDetails();">
+					<div class="task-details">
 						<p id="task-details-task_name"></p>
 						<p id="task-details-task_date"></p>
 						<p id="task-details-task_owner_firstname"></p>

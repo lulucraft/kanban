@@ -12,6 +12,7 @@ fr\cfai_lda\lbesson\kanban\dao\impl\TaskTypeDaoImpl.class
 fr\cfai_lda\lbesson\kanban\dao\TaskHistoryDao.class
 fr\cfai_lda\lbesson\kanban\dao\ColorDao.class
 fr\cfai_lda\lbesson\kanban\controller\RankController.class
+fr\cfai_lda\lbesson\kanban\util\Checker.class
 fr\cfai_lda\lbesson\kanban\dao\database\DatabaseConnection.class
 fr\cfai_lda\lbesson\kanban\controller\TaskController.class
 fr\cfai_lda\lbesson\kanban\helper\AuthHelper.class
@@ -23,6 +24,7 @@ fr\cfai_lda\lbesson\kanban\dao\database\Query.class
 fr\cfai_lda\lbesson\kanban\controller\TaskProgressController.class
 fr\cfai_lda\lbesson\kanban\business\Token.class
 fr\cfai_lda\lbesson\kanban\dao\TaskTypeDao.class
+fr\cfai_lda\lbesson\kanban\servlet\WebService.class
 fr\cfai_lda\lbesson\kanban\servlet\HomeServlet.class
 fr\cfai_lda\lbesson\kanban\dao\impl\RankDaoImpl.class
 fr\cfai_lda\lbesson\kanban\controller\TaskTypeController.class
@@ -39,3 +41,4 @@ fr\cfai_lda\lbesson\kanban\dao\UserDao.class
 fr\cfai_lda\lbesson\kanban\servlet\KanbanServlet.class
 fr\cfai_lda\lbesson\kanban\business\Task.class
 fr\cfai_lda\lbesson\kanban\dao\impl\TaskDaoImpl.class
+fr\cfai_lda\lbesson\kanban\controller\TaskHistoryController.class

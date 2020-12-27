@@ -60,12 +60,15 @@ public class AuthHelper {
 		return null;
 	}
 
-
 	public static boolean checkConnection(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
+		return checkConnection(req, resp, true);
+	}
+
+	public static boolean checkConnection(HttpServletRequest req, HttpServletResponse resp, boolean redirect) throws SQLException, ServletException, IOException {
 		if (AuthHelper.isConnected(req.getSession())) {
 			return true;
 		} else {
-			req.getRequestDispatcher("connection").forward(req, resp);
+			if (redirect) req.getRequestDispatcher("connection").forward(req, resp);
 			return false;
 		}
 	}

@@ -1,6 +1,7 @@
 package fr.cfai_lda.lbesson.kanban.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.cfai_lda.lbesson.kanban.business.User;
 import fr.cfai_lda.lbesson.kanban.controller.AuthController;
+import fr.cfai_lda.lbesson.kanban.controller.UserController;
+import fr.cfai_lda.lbesson.kanban.helper.AuthHelper;
 
 /**
  * Servlet implementation class ConnectionServlet
@@ -28,8 +31,18 @@ public class ConnectionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/connection.jsp").forward(request, response);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			if (AuthHelper.checkConnection(req, resp, false)) {
+				User user = UserController.getUser((long) req.getSession().getAttribute("user_id"));
+				// Disconnect user
+				AuthController.disconnectUser(user);
+				req.getSession().setAttribute("token", null);
+			}
+		} catch (SQLException | ServletException | IOException e) {
+			e.printStackTrace();
+		}
+		req.getRequestDispatcher("WEB-INF/connection.jsp").forward(req, resp);
 	}
 
 	/**

@@ -12,15 +12,15 @@
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   		<script>
-  			$( function() {
+  			$(function() {
   				// Set scope
-    			$( ".draggable" ).draggable({
+    			$(".draggable").draggable({
     				containment: "tbody tr"
     			});
 
   				// Set drop action
-    			$( ".droppable" ).droppable({
-    				drop: function( event, ui ) {
+    			$(".droppable").droppable({
+    				drop: function(event, ui) {
     					//alert(ui.helper.find("input.task_id").attr("value"));
     					//alert($(this).find("input.task_id").attr("value"));
     					//alert($(this).find("input.taskprogress_id").attr("value"));
@@ -32,7 +32,7 @@
     							"move=" + ui.helper.find("input.task_id").attr("value") +
     							"&progress=" + $(this).find("input.taskprogress_id").attr("value")
     					);
-    			        $( this )
+    			        $(this)
     			          .find( "input.task_id" )
     			            .html( "Dropped!" );
     			    }
@@ -60,6 +60,10 @@
   			} );
   		</script>
   		<script type="text/javascript">
+  			function insertAfter(referenceNode, newNode) {
+  		  		referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  			}
+
   			function addTask() {
   				var addTaskForm = document.forms['form-new-task'];
   				var taskName = addTaskForm.elements.task_name.value;
@@ -75,21 +79,52 @@
 						"&tasktype=" + taskType
 						);
 
+				const result = getLastTaskId();
+				summonTask(result);
+
 				alert('Tâche ajoutée');
-				refresh();
+			}
+
+  			function summonTask(taskId) {
+  				taskprogress_id = document.getElementsByClassName('taskprogress_id')[0];
+  				if (taskprogress_id == null) return;
+
+  				task_name = document.getElementById('task_name');
+  				if (task_name == null) return;
+
+  				divParent = document.createElement("div");
+  				divParent.className = 'draggable ui-widget-content';
+
+  				div = document.createElement("div");
+  				div.className = 'kanban-task';
+  				div.setAttribute('onclick', 'showTaskDetails(this);');
+ 
+  				task_type = document.getElementById("task_type");
+  				if (task_type != null) div.style.backgroundColor = task_type.style.backgroundColor;
+
+  				input = document.createElement("input");
+  				input.type = 'hidden';
+  				input.className = 'task_id';
+  				input.value = taskId;
+
+  				p = document.createElement("p");
+  				p.innerHTML = task_name.value;
+
+  				insertAfter(taskprogress_id, divParent);
+  				divParent.appendChild(div);
+  				div.appendChild(input);
+  				div.appendChild(p);
+
+  	  			// Set scope
+  	    		$(".draggable").draggable({
+  	    			containment: "tbody tr"
+  	    		});
 			}
 
   			function refresh() {
 				document.location.reload();
 			}
  
-  			function showTaskDetails(e) {
-  				// Show modal
-  				document.getElementById('task-details-dialog').showModal();
-
-  				getTaskDetails(e);
-  			}
-
   			function getTaskDetails(e) {
   				var taskId = e.getElementsByClassName('task_id')[0];
   				if (taskId == null) return;
@@ -108,7 +143,7 @@
 							var jsonResponse = JSON.parse(xhr.responseText);
 
 							document.getElementById('task-details-task_name').innerHTML = jsonResponse.name.htmlEscape();
-							document.getElementById('task-details-task_date').innerHTML = jsonResponse.creationDate;
+							document.getElementById('task-details-task_date').innerHTML = new Date(jsonResponse.creationDate).toString();
 							document.getElementById('task-details-task_owner_firstname').innerHTML = 'Prénom du créateur : ' + jsonResponse.taskOwner.firstName.htmlEscape();
 							document.getElementById('task-details-task_owner_lastname').innerHTML = 'Nom de famille du créateur : ' + jsonResponse.taskOwner.lastName.htmlEscape();
 							document.getElementById('task-details-task_type').innerHTML = 'Type de tâche : ' + jsonResponse.taskType.label.htmlEscape();
@@ -118,6 +153,30 @@
   				};
 				xhr.send("taskid=" + taskId);
 			}
+
+  			function getLastTaskId() {
+  				var xhr = new XMLHttpRequest();
+  				xhr.open('POST', 'api', false);
+  				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+   				xhr.overrideMimeType("application/json");
+  				xhr.send(null);
+  				return JSON.parse(xhr.responseText).id;
+			}
+
+  			function showTaskDetails(e) {
+  				// Show modal
+  				taskDialog = document.getElementById('task-details-dialog');
+  				if (taskDialog == null) return;
+  				taskDialog.showModal();
+  				getTaskDetails(e);
+  			}
+
+  			function closeTaskDetailsDialog() {
+  				// Close modal
+  				taskDialog = document.getElementById("task-details-dialog");
+  				if (taskDialog == null) return;
+  				taskDialog.close();
+  			}
 
 //   			function changeTaskType() {
 //   				var selectTaskType = document.getElementById("task_type");
@@ -186,12 +245,17 @@
 							</c:forEach>
 						</select>
 
-						<input type="submit" name="add" onclick="addTask();" value="Ajouter" style="padding: 3px 5px 3px 5px;margin: 2px;">
+						<input type="button" name="add" onclick="addTask();" value="Ajouter" style="padding: 3px 5px 3px 5px;margin: 2px;">
 					</form>
 				</div>
 
 				<!-- Task details dialog -->
 				<dialog id="task-details-dialog">
+					<menu>
+						<div class="task-details-button">
+							<button onclick="closeTaskDetailsDialog();">x</button>
+						</div>
+					</menu>
 					<div class="task-details">
 						<p id="task-details-task_name"></p>
 						<p id="task-details-task_date"></p>

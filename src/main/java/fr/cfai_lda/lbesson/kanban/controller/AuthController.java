@@ -37,6 +37,13 @@ public class AuthController {
 		return null;
 	}
 
+	public static void disconnectUser(User user) {
+		if (user == null) return;
+
+		user.setConnected(false);
+		user.setToken(null);
+	}
+
 	public static String hashPassword(String password) {
 		return BCRYPT.hash(password);
 	}

@@ -30,6 +30,10 @@ public class TaskController {
 		return null;
 	}
 
+	public static Task getLastTask() {
+		return tasks.get(tasks.size()-1);
+	}
+
 	public static Task createTask(Long id, String taskName, TaskType taskType, TaskProgress taskProgress, Date creationDate, User taskOwner) {
 		Task task = getTask(id);
 		// Task already exists

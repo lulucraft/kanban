@@ -65,6 +65,11 @@ public class KanbanServlet extends HttpServlet {
 			}
 			// Add request
 			else if (req.getParameter("new") != null) {
+				// Check user rights
+				if (!user.getAccountType().getRankName().toUpperCase().equals("ADMIN")) {
+					return;
+				}
+
 				String taskName = req.getParameter("new");
 				String taskType = req.getParameter("tasktype");
 				if (taskType == null) return;

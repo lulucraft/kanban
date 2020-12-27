@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
 
 @font-face {
 	font-family: "CactusStory";
@@ -14,7 +15,6 @@
 /* 	background-size: cover; */
 /* 	background-repeat: no-repeat; */
 /* } */
-
 small {
 	width: 100%;
 	margin: auto;
@@ -51,14 +51,12 @@ small {
 	max-height: 100%;
 }
 
-
 /* BACKGROUNDS */
 .kanban-background {
 	background: url("../images/background.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 }
-
 
 .center {
 	text-align: center;
@@ -79,18 +77,17 @@ small {
 	color: red;
 }
 
-
 .kanban-title {
-/* 	background: firebrick; */
+	/* 	background: firebrick; */
 	background-color: #ff9393;
 	padding: 10px;
-    margin-bottom: 5px;
-    border: 12px solid #7e5f43;
-    color: black;
+	margin-bottom: 5px;
+	border: 12px solid #7e5f43;
+	color: black;
 }
 
 .kanban-table {
-/* 	font-family: "CactusStory"; */
+	/* 	font-family: "CactusStory"; */
 	background-color: #393939;
 	border: 18px solid #7e5f43;
 	/* 	height: 90%; */
@@ -103,8 +100,8 @@ small {
 .kanban-table th,
 .kanban-table td {
 	font-family: "CactusStory";
-    font-size: 170%;
-    letter-spacing: 3px;
+	font-size: 170%;
+	letter-spacing: 3px;
 	width: 500px;
 	border-right: 2px solid white;
 	text-align: center;
@@ -130,19 +127,18 @@ small {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
 	padding: 2%;
-/*     background-color: #ffffa5; */
-    box-shadow: 2px 4px 6px #444;
-    -moz-box-shadow: 2px 4px 6px #444;
-    -webkit-box-shadow: 2px 4px 6px #444;
-    transform: rotate(2deg);
-    -moz-transform: rotate(2deg);
-    -webkit-transform: rotate(2deg);
-    -o-transform: rotate(2deg);
-    -ms-transform: rotate(2deg);
-    border-bottom-right-radius: 60px 10px;
-    color: black;
+	/*     background-color: #ffffa5; */
+	box-shadow: 2px 4px 6px #444;
+	-moz-box-shadow: 2px 4px 6px #444;
+	-webkit-box-shadow: 2px 4px 6px #444;
+	transform: rotate(2deg);
+	-moz-transform: rotate(2deg);
+	-webkit-transform: rotate(2deg);
+	-o-transform: rotate(2deg);
+	-ms-transform: rotate(2deg);
+	border-bottom-right-radius: 60px 10px;
+	color: black;
 }
 
 .kanban-task > p {
@@ -155,8 +151,8 @@ small {
 #task_name,
 #task_type {
 	border: none;
-    margin: 2px;
-    padding: 3px;
+	margin: 2px;
+	padding: 3px;
 }
 
 .kanban-controls {
@@ -167,8 +163,8 @@ small {
 	margin: auto;
 	margin-top: 5px;
 	display: flex;
-    justify-content: center;
-    align-items: center;
+	justify-content: center;
+	align-items: center;
 }
 
 .draggable {
@@ -176,17 +172,35 @@ small {
 	width: 130px;
 	height: 130px;
 	padding: 0.5em;
-/* 	color: cornflowerblue; */
+	/* 	color: cornflowerblue; */
 	overflow: hidden;
 	display: inline-block;
 }
 
 .right-corner-button {
 	position: absolute;
-    top: 23px;
-    right: 20px;
-    background: none;
-    outline: none;
-    border: none;
-    cursor: pointer;
+	top: 23px;
+	right: 20px;
+	background: none;
+	outline: none;
+	border: none;
+	cursor: pointer;
+}
+
+.task-details-button {
+	position: absolute;
+	margin: 5px;
+	right: 0;
+	top: 0;
+}
+
+.task-details-button > button {
+	border-radius: 100%;
+	cursor: pointer;
+	outline: none;
+}
+
+.task-details-button > button:hover {
+	background: #000000;
+	color: white;
 }

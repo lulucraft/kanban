@@ -49,7 +49,6 @@ public class Task {
 	/**
 	 * @return the id
 	 */
-	@JsonIgnore
 	public Long getId() {
 		return id;
 	}
