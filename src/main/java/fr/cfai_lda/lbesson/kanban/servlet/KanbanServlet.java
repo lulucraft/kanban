@@ -54,8 +54,7 @@ public class KanbanServlet extends HttpServlet {
 			// Move request
 			if (req.getParameter("move") != null) {
 				// Move task
-				TaskHistory taskHistory = TaskController.moveTask(req.getParameter("move"),
-						req.getParameter("progress"), user);
+				TaskHistory taskHistory = TaskController.moveTask(req.getParameter("move"), req.getParameter("progress"), user);
 				if (taskHistory == null) return;
 
 				// Save new task progress in database
