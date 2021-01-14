@@ -18,7 +18,7 @@ public class ColorController {
 		if (id == null) return null;
 
 		for (Color c : colors) {
-			if (c.getId() == id) {
+			if (c.getId().equals(id)) {
 				return c;
 			}
 		}

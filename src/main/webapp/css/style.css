@@ -10,11 +10,12 @@
 	box-sizing: border-box;
 }
 
-/* html { */
+html {
+	font-family: Helvetica;
 /* 	background: url("../images/background.jpg"); */
 /* 	background-size: cover; */
 /* 	background-repeat: no-repeat; */
-/* } */
+}
 small {
 	width: 100%;
 	margin: auto;
@@ -64,8 +65,8 @@ small {
 
 .frame {
 	padding: 12px;
-	border: 3px solid #ffffff;
-	background-color: #e2e2e2b3;
+	border: 2px solid #efefef;
+    background-color: #e2e2e29e;
 }
 
 .form-item {
@@ -177,14 +178,25 @@ small {
 	display: inline-block;
 }
 
+.left-corner-button,
 .right-corner-button {
 	position: absolute;
 	top: 23px;
+	cursor: pointer;
+}
+
+.right-corner-button {
 	right: 20px;
+}
+
+.left-corner-button {
+	left: 20px;
+}
+
+.icon {
 	background: none;
 	outline: none;
 	border: none;
-	cursor: pointer;
 }
 
 .task-details-button {
@@ -203,4 +215,15 @@ small {
 .task-details-button > button:hover {
 	background: #000000;
 	color: white;
+}
+
+
+/* PANEL */
+.panel-title {
+	border-bottom: 1px solid #000000c9;
+}
+
+.panel-table-body {
+	height: 500px;
+	padding: 5px;
 }

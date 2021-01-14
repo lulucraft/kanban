@@ -11,47 +11,47 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.cfai_lda.lbesson.kanban.business.Right;
 import fr.cfai_lda.lbesson.kanban.business.User;
-import fr.cfai_lda.lbesson.kanban.controller.DataController;
 import fr.cfai_lda.lbesson.kanban.controller.RightController;
 import fr.cfai_lda.lbesson.kanban.controller.UserController;
 import fr.cfai_lda.lbesson.kanban.helper.AuthHelper;
 
 /**
- * Servlet implementation class HomeServlet
+ * Servlet implementation class panel
  */
-@WebServlet(urlPatterns = "/home", loadOnStartup = 1)
-public class HomeServlet extends HttpServlet {
+@WebServlet("/panel")
+public class PanelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public HomeServlet() {
+	public PanelServlet() {
 		super();
-		try {
-			DataController.loadData();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		//UserController.createUser(1L, "new", "test", "admin", AuthController.hashPassword("root"), new Rank("Test"));
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			if (!AuthHelper.checkConnection(req, resp)) return;
+			if (!AuthHelper.checkConnection(req, resp)) {
+				req.setAttribute("isAdmin", false);
+				return;
+			}
 
 			// If connected
 			User user = UserController.getUser((long) req.getSession().getAttribute("user_id"));
-			String username = user.getUsername();
-			req.setAttribute("username", username);
 
 			Right showPanelRight = RightController.getRight("SHOW_PANEL");
 			if (showPanelRight != null) {
-				req.setAttribute("hasShowPanelPermission", user.getRank().getRights().contains(showPanelRight));
+				boolean c = user.getRank().getRights().contains(showPanelRight);
+
+				req.setAttribute("hasShowPanelPermission", c);
+				if (c) {
+					req.getRequestDispatcher("WEB-INF/panel.jsp").forward(req, resp);
+				}
+
+				return;
 			} else {
 				req.setAttribute("hasShowPanelPermission", false);
 			}
@@ -65,8 +65,8 @@ public class HomeServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

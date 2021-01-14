@@ -43,15 +43,16 @@ public class RightRankDaoImpl implements RightRankDao {
 			long rank_id = rs.getLong("rank_id");
 			long rights_id = rs.getLong("rights_id");
 
-			Right right = new RightDaoImpl().getRightById(rights_id);//RightController.getRight(rights_id);
+			Right right = new RightDaoImpl().getRightById(rights_id);
 			if (right != null) {
-				Rank rank = new RankDaoImpl().getRankById(rank_id);//RankController.getRank(rank_id);
+				Rank rank = new RankDaoImpl().getRankById(rank_id);
 				if (rank != null) {
 					rank.addRight(right);
 					ranks.add(rank);
 				}
 			}
 		}
+
 		return ranks;
 	}
 

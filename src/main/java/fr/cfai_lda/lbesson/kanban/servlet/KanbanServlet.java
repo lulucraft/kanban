@@ -47,7 +47,6 @@ public class KanbanServlet extends HttpServlet {
 		try {
 			if (!AuthHelper.checkConnection(req, resp)) {
 				req.setAttribute("taskProgress", Arrays.asList(new TaskProgress("")));
-				req.setAttribute("isAdmin", false);
 				return;
 			}
 			// If user connected
@@ -66,7 +65,7 @@ public class KanbanServlet extends HttpServlet {
 			if (req.getParameter("move") != null) {
 				// Check user rights
 				Right right = RightController.getRight("MOVE_TASK");
-				if (right != null || !user.getRank().getRights().contains(right)) {
+				if (right == null || !user.getRank().getRights().contains(right)) {
 					return;
 				}
 

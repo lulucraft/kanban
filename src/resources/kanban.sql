@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 02 déc. 2020 à 00:17
+-- Généré le :  jeu. 14 jan. 2021 à 18:37
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `kanban`
 --
-CREATE DATABASE IF NOT EXISTS `kanban` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `kanban`;
 
 -- --------------------------------------------------------
 
@@ -62,14 +60,15 @@ CREATE TABLE IF NOT EXISTS `color` (
   `label` varchar(11) NOT NULL,
   `rgbcode` varchar(13) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `color`
 --
 
 INSERT INTO `color` (`id`, `label`, `rgbcode`) VALUES
-(1, 'BLUE', '0, 0, 255');
+(1, 'BLUE', '0, 161, 255'),
+(2, 'ORANGE', '248, 156, 14');
 
 -- --------------------------------------------------------
 
@@ -95,6 +94,55 @@ INSERT INTO `rank` (`id`, `label`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `rights`
+--
+
+DROP TABLE IF EXISTS `rights`;
+CREATE TABLE IF NOT EXISTS `rights` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `label` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `rights`
+--
+
+INSERT INTO `rights` (`id`, `label`) VALUES
+(1, 'CREATE_TASK'),
+(2, 'MOVE_TASK'),
+(3, 'SHOW_TASK');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `right_rank`
+--
+
+DROP TABLE IF EXISTS `right_rank`;
+CREATE TABLE IF NOT EXISTS `right_rank` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `rank_id` bigint(20) NOT NULL,
+  `rights_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `rank_id` (`rank_id`,`rights_id`),
+  KEY `rights_id_fk` (`rights_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `right_rank`
+--
+
+INSERT INTO `right_rank` (`id`, `rank_id`, `rights_id`) VALUES
+(1, 5, 1),
+(2, 5, 2),
+(3, 5, 3),
+(4, 6, 2),
+(5, 6, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `task`
 --
 
@@ -110,14 +158,17 @@ CREATE TABLE IF NOT EXISTS `task` (
   KEY `task_id_FK` (`account_id`),
   KEY `tasktype_id_FK` (`tasktype_id`),
   KEY `taskprogress_id_FK` (`taskprogress_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `task`
 --
 
 INSERT INTO `task` (`id`, `name`, `creation_date`, `account_id`, `tasktype_id`, `taskprogress_id`) VALUES
-(1, 'tachetest', '2020-11-26', 1, 5, 11);
+(1, 'tachetest', '2020-11-26', 1, 5, 11),
+(3, 'lolll', '2020-12-21', 3, 5, 9),
+(4, 'sdtgseggressger', '2020-12-21', 3, 5, 12),
+(5, 'mdr', '2021-01-14', 3, 6, 10);
 
 -- --------------------------------------------------------
 
@@ -136,14 +187,54 @@ CREATE TABLE IF NOT EXISTS `taskhistory` (
   KEY `taskhistory_taskprogress_id_FK` (`taskprogress_id`),
   KEY `taskhistory_task_id_FK` (`task_id`),
   KEY `user_id_FK` (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `taskhistory`
 --
 
 INSERT INTO `taskhistory` (`id`, `moving_date`, `task_id`, `taskprogress_id`, `user_id`) VALUES
-(8, '2020-12-02', 1, 11, 4);
+(8, '2020-12-02', 1, 11, 4),
+(9, '2020-12-21', 1, 10, 3),
+(10, '2020-12-21', 1, 11, 4),
+(11, '2020-12-21', 1, 10, 4),
+(12, '2020-12-21', 3, 11, 3),
+(13, '2020-12-21', 3, 9, 3),
+(14, '2020-12-21', 4, 11, 3),
+(15, '2020-12-21', 4, 9, 3),
+(25, '2020-12-21', 3, 10, 3),
+(26, '2021-01-06', 3, 10, 3),
+(27, '2021-01-06', 3, 9, 3),
+(28, '2021-01-06', 3, 10, 3),
+(29, '2021-01-06', 3, 9, 3),
+(30, '2021-01-06', 3, 10, 3),
+(31, '2021-01-06', 3, 9, 3),
+(32, '2021-01-06', 3, 10, 3),
+(33, '2021-01-06', 3, 9, 3),
+(34, '2021-01-06', 3, 10, 3),
+(35, '2021-01-06', 3, 9, 3),
+(36, '2021-01-06', 3, 10, 3),
+(37, '2021-01-06', 3, 9, 3),
+(38, '2021-01-06', 3, 10, 3),
+(39, '2021-01-06', 3, 9, 3),
+(40, '2021-01-06', 3, 10, 3),
+(41, '2021-01-06', 3, 9, 3),
+(46, '2021-01-07', 4, 9, 4),
+(47, '2021-01-07', 4, 12, 4),
+(48, '2021-01-07', 4, 9, 4),
+(49, '2021-01-07', 4, 10, 4),
+(50, '2021-01-07', 4, 9, 4),
+(51, '2021-01-07', 4, 12, 4),
+(52, '2021-01-07', 4, 9, 4),
+(53, '2021-01-07', 4, 11, 4),
+(54, '2021-01-07', 4, 12, 4),
+(55, '2021-01-07', 4, 9, 4),
+(56, '2021-01-07', 4, 10, 4),
+(57, '2021-01-07', 4, 9, 4),
+(58, '2021-01-07', 4, 12, 4),
+(59, '2021-01-14', 5, 10, 3),
+(60, '2021-01-14', 5, 9, 4),
+(61, '2021-01-14', 5, 10, 4);
 
 -- --------------------------------------------------------
 
@@ -181,14 +272,15 @@ CREATE TABLE IF NOT EXISTS `tasktype` (
   `color_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `color_color_id_FK` (`color_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `tasktype`
 --
 
 INSERT INTO `tasktype` (`id`, `label`, `color_id`) VALUES
-(5, 'FEATURE', 1);
+(5, 'FEATURE', 1),
+(6, 'BUG', 2);
 
 --
 -- Contraintes pour les tables déchargées
@@ -199,6 +291,13 @@ INSERT INTO `tasktype` (`id`, `label`, `color_id`) VALUES
 --
 ALTER TABLE `account`
   ADD CONSTRAINT `rank_id_FK` FOREIGN KEY (`rank_id`) REFERENCES `rank` (`id`);
+
+--
+-- Contraintes pour la table `right_rank`
+--
+ALTER TABLE `right_rank`
+  ADD CONSTRAINT `right_rank_id_fk` FOREIGN KEY (`rank_id`) REFERENCES `rank` (`id`),
+  ADD CONSTRAINT `rights_id_fk` FOREIGN KEY (`rights_id`) REFERENCES `rights` (`id`);
 
 --
 -- Contraintes pour la table `task`

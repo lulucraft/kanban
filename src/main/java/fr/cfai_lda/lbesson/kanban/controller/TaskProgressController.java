@@ -17,7 +17,7 @@ public class TaskProgressController {
 		if (id == null) return null;
 
 		for (TaskProgress tp : taskProgress) {
-			if (tp.getId() == id) {
+			if (tp.getId().equals(id)) {
 				return tp;
 			}
 		}

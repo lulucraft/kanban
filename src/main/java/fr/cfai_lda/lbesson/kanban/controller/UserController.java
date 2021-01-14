@@ -18,7 +18,7 @@ public class UserController {
 		if (id == null) return null;
 
 		for (User u : users) {
-			if (u.getId() == id) {
+			if (u.getId().equals(id)) {
 				return u;
 			}
 		}

@@ -23,7 +23,7 @@ public class TaskController {
 		if (id == null) return null;
 
 		for (Task t : tasks) {
-			if (t.getId() == id) {
+			if (t.getId().equals(id)) {
 				return t;
 			}
 		}

@@ -11,7 +11,7 @@
     <body>
     	<div id="center" class="frame">
         	<form action="connection" method="POST" id="auth-form">
-        		<h2>Page de connexion</h2>
+        		<h3>Page de connexion</h3>
         		<div class="form-item">
             		<label for="username">Username :</label>
             		<input type="text" id="username" name="username" size="20" required>

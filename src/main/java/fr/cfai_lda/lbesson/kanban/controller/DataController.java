@@ -34,6 +34,7 @@ public class DataController {
 		// Load rights
 		loadRights();
 
+		// Load ranks rights
 		loadRightsRanks();
 
 		// Load colors
@@ -110,6 +111,7 @@ public class DataController {
 				rightRankDao.assignRightToRank(RightController.getRight("CREATE_TASK"), rank);
 				rightRankDao.assignRightToRank(RightController.getRight("MOVE_TASK"), rank);
 				rightRankDao.assignRightToRank(RightController.getRight("SHOW_TASK"), rank);
+				rightRankDao.assignRightToRank(RightController.getRight("SHOW_PANEL"), rank);
 			}
 			rank = RankController.getRank("DEV");
 			if (rank != null) {
