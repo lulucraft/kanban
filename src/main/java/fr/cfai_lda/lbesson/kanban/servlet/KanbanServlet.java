@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.cfai_lda.lbesson.kanban.business.Right;
 import fr.cfai_lda.lbesson.kanban.business.Task;
 import fr.cfai_lda.lbesson.kanban.business.TaskHistory;
 import fr.cfai_lda.lbesson.kanban.business.TaskProgress;
 import fr.cfai_lda.lbesson.kanban.business.User;
+import fr.cfai_lda.lbesson.kanban.controller.RightController;
 import fr.cfai_lda.lbesson.kanban.controller.TaskController;
 import fr.cfai_lda.lbesson.kanban.controller.TaskProgressController;
 import fr.cfai_lda.lbesson.kanban.controller.TaskTypeController;
@@ -45,14 +47,31 @@ public class KanbanServlet extends HttpServlet {
 		try {
 			if (!AuthHelper.checkConnection(req, resp)) {
 				req.setAttribute("taskProgress", Arrays.asList(new TaskProgress("")));
+				req.setAttribute("isAdmin", false);
 				return;
 			}
 			// If user connected
 			User user = UserController.getUser((long) req.getSession().getAttribute("user_id"));
 			req.setAttribute("username", user.getUsername());
 
+			Right createTaskRight = RightController.getRight("CREATE_TASK");
+			if (createTaskRight != null) {
+				System.out.println("1");
+				req.setAttribute("hasCreateTaskPermission", user.getRank().getRights().contains(createTaskRight));//user.getRank().getRankName().equalsIgnoreCase(""));
+			} else {
+				System.out.println("2");
+				req.setAttribute("hasCreateTaskPermission", false);
+			}
+
+
 			// Move request
 			if (req.getParameter("move") != null) {
+				// Check user rights
+				Right right = RightController.getRight("MOVE_TASK");
+				if (right != null || !user.getRank().getRights().contains(right)) {
+					return;
+				}
+
 				// Move task
 				TaskHistory taskHistory = TaskController.moveTask(req.getParameter("move"), req.getParameter("progress"), user);
 				if (taskHistory == null) return;
@@ -65,7 +84,7 @@ public class KanbanServlet extends HttpServlet {
 			// Add request
 			else if (req.getParameter("new") != null) {
 				// Check user rights
-				if (!user.getAccountType().getRankName().toUpperCase().equals("ADMIN")) {
+				if (createTaskRight == null || !user.getRank().getRights().contains(createTaskRight)) {
 					return;
 				}
 

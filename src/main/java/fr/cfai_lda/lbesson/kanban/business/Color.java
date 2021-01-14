@@ -3,17 +3,17 @@ package fr.cfai_lda.lbesson.kanban.business;
 public class Color {
 
 	private Long id;
-	private String name;
+	private String label;
 	private RGBColor rgbColor;
 
-	public Color(String name, RGBColor rgbColor) {
-		this(null, name, rgbColor);
+	public Color(String label, RGBColor rgbColor) {
+		this(null, label, rgbColor);
 	}
 
-	public Color(Long id, String name, RGBColor rgbColor) {
+	public Color(Long id, String label, RGBColor rgbColor) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.label = label;
 		this.rgbColor = rgbColor;
 	}
 
@@ -32,17 +32,17 @@ public class Color {
 	}
 
 	/**
-	 * @return the name
+	 * @return the color label
 	 */
-	public String getName() {
-		return name;
+	public String getLabel() {
+		return label;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param label the color label to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class Color {
 
 	@Override
 	public String toString() {
-		return "Color [id=" + id + ", name=" + name + ", rgbColor=" + rgbColor + "]";
+		return "Color [id=" + id + ", label=" + label + ", rgbColor=" + rgbColor + "]";
 	}
 
 }

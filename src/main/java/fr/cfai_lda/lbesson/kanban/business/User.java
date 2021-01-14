@@ -3,30 +3,31 @@ package fr.cfai_lda.lbesson.kanban.business;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class User {
+
 	private Long id;
 	private String firstName;
 	private String lastName;
 	private String username;
 	private String hashedPassword;
-	private Rank accountType;
+	private Rank rank;
 	private boolean isConnected;
 
 	private Token token;
 
 	//private static long id_max = 0L;
 
-	public User(Long id, String firstName, String lastName, String username, String hashedPassword, Rank accountType) {
+	public User(Long id, String firstName, String lastName, String username, String hashedPassword, Rank rank) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.hashedPassword = hashedPassword;
-		this.accountType = accountType;
+		this.rank = rank;
 	}
 
-	public User(String firstName, String lastName, String username, String hashedPassword, Rank accountType) {
-		this(null, firstName, lastName, username, hashedPassword, accountType);
+	public User(String firstName, String lastName, String username, String hashedPassword, Rank rank) {
+		this(null, firstName, lastName, username, hashedPassword, rank);
 	}
 
 	/**
@@ -115,15 +116,15 @@ public class User {
 	 * @return the accountType
 	 */
 	@JsonIgnore
-	public Rank getAccountType() {
-		return accountType;
+	public Rank getRank() {
+		return rank;
 	}
 
 	/**
 	 * @param accountType the accountType to set
 	 */
-	public void setAccountType(Rank accountType) {
-		this.accountType = accountType;
+	public void setRank(Rank rank) {
+		this.rank = rank;
 	}
 
 	/**
@@ -149,6 +150,9 @@ public class User {
 		return token;
 	}
 
+	/**
+	 * @param token the token to set
+	 */
 	public void setToken(Token token) {
 		this.token = token;
 	}
@@ -156,7 +160,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-				+ ", hashedPassword=" + hashedPassword + ", accountType=" + accountType + ", isConnected=" + isConnected
+				+ ", hashedPassword=" + hashedPassword + ", rank=" + rank + ", isConnected=" + isConnected
 				+ ", token=" + token + "]";
 	}
 

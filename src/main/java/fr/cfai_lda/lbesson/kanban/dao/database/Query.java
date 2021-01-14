@@ -35,6 +35,15 @@ public class Query {
 	public static final String ALL_RANKS = "SELECT id, label FROM rank";
 	public static final String UPDATE_RANK = "UPDATE rank SET label=? WHERE id=?";
 
+	// RIGHTS
+	public static final String ADD_RIGHT = "INSERT INTO rights (label) VALUES (?)";
+	public static final String RIGHT_BY_ID = "SELECT id, label FROM rights WHERE id=?";
+	public static final String ALL_RIGHTS = "SELECT id, label FROM rights";
+
+	// RIGHTS ASSIGNATION
+	public static final String ADD_RIGHT_TO_RANK = "INSERT INTO right_rank (rank_id, rights_id) VALUES (?,?)";
+	public static final String ALL_RIGHT_RANK = "SELECT id, rank_id, rights_id FROM right_rank";
+
 	// COLORS
 	public static final String ADD_COLOR = "INSERT INTO color (label, rgbcode) VALUES (?,?)";
 	public static final String ALL_COLORS = "SELECT id, label, rgbcode FROM color";

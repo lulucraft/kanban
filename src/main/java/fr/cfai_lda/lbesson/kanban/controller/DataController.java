@@ -1,20 +1,27 @@
 package fr.cfai_lda.lbesson.kanban.controller;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map.Entry;
 
 import fr.cfai_lda.lbesson.kanban.business.Color;
 import fr.cfai_lda.lbesson.kanban.business.RGBColor;
 import fr.cfai_lda.lbesson.kanban.business.Rank;
+import fr.cfai_lda.lbesson.kanban.business.Right;
 import fr.cfai_lda.lbesson.kanban.business.Task;
 import fr.cfai_lda.lbesson.kanban.business.TaskProgress;
 import fr.cfai_lda.lbesson.kanban.business.TaskType;
 import fr.cfai_lda.lbesson.kanban.business.User;
 import fr.cfai_lda.lbesson.kanban.dao.ColorDao;
 import fr.cfai_lda.lbesson.kanban.dao.RankDao;
+import fr.cfai_lda.lbesson.kanban.dao.RightDao;
+import fr.cfai_lda.lbesson.kanban.dao.RightRankDao;
 import fr.cfai_lda.lbesson.kanban.dao.TaskProgressDao;
 import fr.cfai_lda.lbesson.kanban.dao.TaskTypeDao;
 import fr.cfai_lda.lbesson.kanban.dao.impl.ColorDaoImpl;
 import fr.cfai_lda.lbesson.kanban.dao.impl.RankDaoImpl;
+import fr.cfai_lda.lbesson.kanban.dao.impl.RightDaoImpl;
+import fr.cfai_lda.lbesson.kanban.dao.impl.RightRankDaoImpl;
 import fr.cfai_lda.lbesson.kanban.dao.impl.TaskDaoImpl;
 import fr.cfai_lda.lbesson.kanban.dao.impl.TaskProgressDaoImpl;
 import fr.cfai_lda.lbesson.kanban.dao.impl.TaskTypeDaoImpl;
@@ -25,6 +32,11 @@ public class DataController {
 	public static void loadData() throws SQLException {
 		// Load ranks
 		loadRanks();
+
+		// Load rights
+		loadRights();
+
+		loadRightsRanks();
 
 		// Load colors
 		loadColors();
@@ -61,13 +73,62 @@ public class DataController {
 	}
 
 	/**
+	 * Load rights from database
+	 * 
+	 * @throws SQLException
+	 */
+	public static void loadRights() throws SQLException {
+		for (Right r : new RightDaoImpl().getAllRights()) {
+			RightController.createRight(r.getId(), r.getLabel());
+		}
+
+		// Create default rights in database
+		if (RightController.getAllRights().isEmpty()) {
+			RightDao rightDao = new RightDaoImpl();
+			rightDao.createRight(new Right("CREATE_TASK"));
+			rightDao.createRight(new Right("MOVE_TASK"));
+			rightDao.createRight(new Right("SHOW_TASK"));
+		}
+	}
+
+	/**
+	 * Load rank rights from database
+	 * 
+	 * @throws SQLException
+	 */
+	public static void loadRightsRanks() throws SQLException {
+		boolean b = true;
+		for (Entry<Rank, List<Right>> r : new RightRankDaoImpl().getAllRightsRanks().entrySet()) {
+			for (Right ri : r.getValue()) {
+				RankController.addRankRight(r.getKey().getId(), ri);
+				b = false;
+			}
+		}
+
+		if (b) {
+			RightRankDao rightRankDao = new RightRankDaoImpl();
+			Rank rank = RankController.getRank("ADMIN");
+			if (rank != null) {
+				rightRankDao.assignRightToRank(RightController.getRight("CREATE_TASK"), rank);
+				rightRankDao.assignRightToRank(RightController.getRight("MOVE_TASK"), rank);
+				rightRankDao.assignRightToRank(RightController.getRight("SHOW_TASK"), rank);
+			}
+			rank = RankController.getRank("DEV");
+			if (rank != null) {
+				rightRankDao.assignRightToRank(RightController.getRight("MOVE_TASK"), rank);
+				rightRankDao.assignRightToRank(RightController.getRight("SHOW_TASK"), rank);
+			}
+		}
+	}
+
+	/**
 	 * Load colors from database
 	 * 
 	 * @throws SQLException
 	 */
 	private static void loadColors() throws SQLException {
 		for (Color c : new ColorDaoImpl().getAllColors()) {
-			ColorController.createColor(c.getId(), c.getName(), c.getRGBColor());
+			ColorController.createColor(c.getId(), c.getLabel(), c.getRGBColor());
 		}
 
 		// Create default colors in database
@@ -124,17 +185,17 @@ public class DataController {
 	public static void loadUsers() throws SQLException {
 		for (User u : new UserDaoImpl().getAllUsers()) {
 			UserController.createUser(u.getId(), u.getFirstName(), u.getLastName(), u.getUsername(), u.getPassword(),
-					u.getAccountType());
+					u.getRank());
 		}
 
 		// Create default users in database
-//		if (UserController.getAllUsers().isEmpty()) {
-//			UserDao userDao = new UserDaoImpl();
-//			userDao.createUser(UserController.createUser(null, "Lucas", "Besson", AuthController.hashPassword("lbesson"), "123456",
-//					RankController.getRank(5L)));
-//			userDao.createUser(UserController.createUser(null, "admintest", "test", AuthController.hashPassword("admin"), "root",
-//					RankController.getRank(6L)));
-//		}
+		//		if (UserController.getAllUsers().isEmpty()) {
+		//			UserDao userDao = new UserDaoImpl();
+		//			userDao.createUser(UserController.createUser(null, "Lucas", "Besson", AuthController.hashPassword("lbesson"), "123456",
+		//					RankController.getRank(5L)));
+		//			userDao.createUser(UserController.createUser(null, "admintest", "test", AuthController.hashPassword("admin"), "root",
+		//					RankController.getRank(6L)));
+		//		}
 	}
 
 	/**
@@ -149,12 +210,12 @@ public class DataController {
 		}
 
 		// Create default tasks in database
-//		if (TaskController.getAllTasks().isEmpty()) {
-//			TaskDao taskDao = new TaskDaoImpl();
-//			taskDao.createTask(
-//					new Task("tachetest", TaskTypeController.getTaskType(5L), TaskProgressController.getTaskProgress(9),
-//							new Date(System.currentTimeMillis()), UserController.getUser("lbesson")));
-//		}
+		//		if (TaskController.getAllTasks().isEmpty()) {
+		//			TaskDao taskDao = new TaskDaoImpl();
+		//			taskDao.createTask(
+		//					new Task("tachetest", TaskTypeController.getTaskType(5L), TaskProgressController.getTaskProgress(9),
+		//							new Date(System.currentTimeMillis()), UserController.getUser("lbesson")));
+		//		}
 	}
 
 }

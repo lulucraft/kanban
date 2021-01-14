@@ -17,6 +17,9 @@
     			$(".draggable").draggable({
     				containment: "tbody tr"
     			});
+    			$(".draggable").click(function(e){
+    				showTaskDetails(this);
+    			});
 
   				// Set drop action
     			$(".droppable").droppable({
@@ -218,8 +221,7 @@
 									<c:forEach items="${tasks}" var="task">
 										<c:if test="${taskProgress.id == task.taskProgress.id }">
 											<div class="draggable ui-widget-content">
-												<div class="kanban-task" style="background-color: rgb(${task.taskType.color.getRGBColor().getString()});"
-													 onclick="showTaskDetails(this);">
+												<div class="kanban-task" style="background-color: rgb(${task.taskType.color.getRGBColor().getString()});">
 													<input type="hidden" class="task_id" value="${task.id}">
 													<p>${fn:escapeXml(task.name)}</p>
 												</div>
@@ -233,21 +235,23 @@
        			</table>
 
 				<!-- Task controls -->
-				<div class="kanban-controls center">
-					<form id="form-new-task">
-						<label for="task_name">Nouvelle tâche : </label>
-						<input type="text" name="task_name" id="task_name" placeHolder="Nom de la tâche" value="${fn:escapeXml(param.task_name)}" required>
+				<c:if test="${hasCreateTaskPermission}">
+					<div class="kanban-controls center">
+						<form id="form-new-task">
+							<label for="task_name">Nouvelle tâche : </label>
+							<input type="text" name="task_name" id="task_name" placeHolder="Nom de la tâche" value="${fn:escapeXml(param.task_name)}" required>
 
-						<label>Type de tâche : </label>
-						<select id="task_type" style="background-color: rgb(${taskTypes[0].color.getRGBColor().getString()})" onchange="changeTaskType();" required>
-							<c:forEach items="${taskTypes}" var="taskType">
-								<option value="${taskType.id}" style="background-color: rgb(${taskType.color.getRGBColor().getString()});">${fn:escapeXml(taskType.label)}</option>
-							</c:forEach>
-						</select>
+							<label>Type de tâche : </label>
+							<select id="task_type" style="background-color: rgb(${taskTypes[0].color.getRGBColor().getString()})" onchange="changeTaskType();" required>
+								<c:forEach items="${taskTypes}" var="taskType">
+									<option value="${taskType.id}" style="background-color: rgb(${taskType.color.getRGBColor().getString()});">${fn:escapeXml(taskType.label)}</option>
+								</c:forEach>
+							</select>
 
-						<input type="button" name="add" onclick="addTask();" value="Ajouter" style="padding: 3px 5px 3px 5px;margin: 2px;">
-					</form>
-				</div>
+							<input type="button" name="add" onclick="addTask();" value="Ajouter" style="padding: 3px 5px 3px 5px;margin: 2px;">
+						</form>
+					</div>
+				</c:if>
 
 				<!-- Task details dialog -->
 				<dialog id="task-details-dialog">

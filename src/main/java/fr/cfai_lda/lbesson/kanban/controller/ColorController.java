@@ -27,7 +27,7 @@ public class ColorController {
 
 	public static Color getColor(String colorName) {
 		for (Color c : colors) {
-			if (c.getName().equals(colorName)) {
+			if (c.getLabel().equals(colorName)) {
 				return c;
 			}
 		}

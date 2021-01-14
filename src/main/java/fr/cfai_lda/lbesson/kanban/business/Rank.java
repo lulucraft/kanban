@@ -1,8 +1,12 @@
 package fr.cfai_lda.lbesson.kanban.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rank {
 	private Long id;
 	private String rankName;
+	private List<Right> rights = new ArrayList<>(); // CREATE_TASK, MOVE_TASK, ...
 	// ADMIN, DEVELOPER;
 
 	//private static long id_max = 0L;
@@ -50,5 +54,16 @@ public class Rank {
 	 */
 	public void setRankName(String rankName) {
 		this.rankName = rankName;
+	}
+
+	public void addRight(Right right) {
+		if (!rights.contains(right)) rights.add(right);
+	}
+
+	/**
+	 * @return the rights
+	 */
+	public List<Right> getRights() {
+		return rights;
 	}
 }

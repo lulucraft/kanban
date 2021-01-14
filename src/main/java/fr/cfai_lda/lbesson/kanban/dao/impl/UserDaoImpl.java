@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 		ps.setString(2, user.getLastName());
 		ps.setString(3, user.getUsername());
 		ps.setString(4, user.getPassword());
-		ps.setLong(5, user.getAccountType().getId());
+		ps.setLong(5, user.getRank().getId());
 		ps.executeUpdate();
 
 		// Get generate new id

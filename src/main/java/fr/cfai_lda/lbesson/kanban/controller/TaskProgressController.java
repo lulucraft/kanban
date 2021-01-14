@@ -13,9 +13,22 @@ public class TaskProgressController {
 		return taskProgress;
 	}
 
-	public static TaskProgress getTaskProgress(long id) {
+	public static TaskProgress getTaskProgress(Long id) {
+		if (id == null) return null;
+
 		for (TaskProgress tp : taskProgress) {
 			if (tp.getId() == id) {
+				return tp;
+			}
+		}
+		return null;
+	}
+
+	public static TaskProgress getTaskProgress(String progressLabel) {
+		if (progressLabel == null) return null;
+
+		for (TaskProgress tp : taskProgress) {
+			if (tp.getLabel().equalsIgnoreCase(progressLabel)) {
 				return tp;
 			}
 		}
@@ -28,11 +41,14 @@ public class TaskProgressController {
 		return taskProgress.get(0);
 	}
 
-	public static void createTaskProgress(Long id, String progressLabel) {
+	public static TaskProgress createTaskProgress(Long id, String progressLabel) {
 		// TaskProgress already exists
-		if (getTaskProgress(id) != null) return;
+		if (getTaskProgress(id) != null) return null;
+		if (getTaskProgress(progressLabel) != null) return null;
 
-		taskProgress.add(new TaskProgress(id, progressLabel));
+		TaskProgress tp = new TaskProgress(id, progressLabel);
+		taskProgress.add(tp);
+		return tp;
 	}
 
 }
