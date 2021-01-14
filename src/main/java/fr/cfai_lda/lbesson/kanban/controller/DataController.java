@@ -1,8 +1,6 @@
 package fr.cfai_lda.lbesson.kanban.controller;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map.Entry;
 
 import fr.cfai_lda.lbesson.kanban.business.Color;
 import fr.cfai_lda.lbesson.kanban.business.RGBColor;
@@ -98,9 +96,9 @@ public class DataController {
 	 */
 	public static void loadRightsRanks() throws SQLException {
 		boolean b = true;
-		for (Entry<Rank, List<Right>> r : new RightRankDaoImpl().getAllRightsRanks().entrySet()) {
-			for (Right ri : r.getValue()) {
-				RankController.addRankRight(r.getKey().getId(), ri);
+		for (Rank r : new RightRankDaoImpl().getAllRanksWithRights()) {
+			for (Right ri : r.getRights()) {
+				RankController.addRankRight(r.getId(), ri);
 				b = false;
 			}
 		}
@@ -185,7 +183,7 @@ public class DataController {
 	public static void loadUsers() throws SQLException {
 		for (User u : new UserDaoImpl().getAllUsers()) {
 			UserController.createUser(u.getId(), u.getFirstName(), u.getLastName(), u.getUsername(), u.getPassword(),
-					u.getRank());
+					RankController.getRank(u.getRank().getId()));
 		}
 
 		// Create default users in database

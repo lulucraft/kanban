@@ -56,10 +56,8 @@ public class KanbanServlet extends HttpServlet {
 
 			Right createTaskRight = RightController.getRight("CREATE_TASK");
 			if (createTaskRight != null) {
-				System.out.println("1");
-				req.setAttribute("hasCreateTaskPermission", user.getRank().getRights().contains(createTaskRight));//user.getRank().getRankName().equalsIgnoreCase(""));
+				req.setAttribute("hasCreateTaskPermission", user.getRank().getRights().contains(createTaskRight));
 			} else {
-				System.out.println("2");
 				req.setAttribute("hasCreateTaskPermission", false);
 			}
 

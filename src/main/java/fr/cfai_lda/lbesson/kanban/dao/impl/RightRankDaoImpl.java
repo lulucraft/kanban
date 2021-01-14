@@ -5,14 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import fr.cfai_lda.lbesson.kanban.business.Rank;
 import fr.cfai_lda.lbesson.kanban.business.Right;
-import fr.cfai_lda.lbesson.kanban.controller.RankController;
-import fr.cfai_lda.lbesson.kanban.controller.RightController;
 import fr.cfai_lda.lbesson.kanban.dao.RightRankDao;
 import fr.cfai_lda.lbesson.kanban.dao.database.DatabaseConnection;
 import fr.cfai_lda.lbesson.kanban.dao.database.Query;
@@ -38,35 +34,25 @@ public class RightRankDaoImpl implements RightRankDao {
 	}
 
 	@Override
-	public Map<Rank, List<Right>> getAllRightsRanks() throws SQLException {
-		Map<Rank, List<Right>> rightsRanks = new HashMap<>();
-		List<Right> rights = new ArrayList<>();
+	public List<Rank> getAllRanksWithRights() throws SQLException {
+		List<Rank> ranks = new ArrayList<>();
 
 		ResultSet rs = connection.prepareStatement(Query.ALL_RIGHT_RANK).executeQuery();
-
-		long prev_rank_id = 0;
 
 		while (rs.next()) {
 			long rank_id = rs.getLong("rank_id");
 			long rights_id = rs.getLong("rights_id");
 
-			if (prev_rank_id != rank_id) {
-				rights.clear();
-			}
-			prev_rank_id = rank_id;
-
-			Right right = RightController.getRight(rights_id);//new RightDaoImpl().getRightById(rights_id);
+			Right right = new RightDaoImpl().getRightById(rights_id);//RightController.getRight(rights_id);
 			if (right != null) {
-				rights.add(right);
-
-				Rank rank = RankController.getRank(rank_id);//new RankDaoImpl().getRankById(rank_id);
+				Rank rank = new RankDaoImpl().getRankById(rank_id);//RankController.getRank(rank_id);
 				if (rank != null) {
-					rightsRanks.put(rank, rights);
+					rank.addRight(right);
+					ranks.add(rank);
 				}
 			}
-			System.err.println(rightsRanks.get(RankController.getRank(5L)).get(0).getLabel());
 		}
-		return rightsRanks;
+		return ranks;
 	}
 
 	@Override
