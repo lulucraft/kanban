@@ -17,7 +17,7 @@ public class RightController {
 		if (id == null) return null;
 
 		for (Right r : rights) {
-			if (r.getId() == id) {
+			if (r.getId().equals(id)) {
 				return r;
 			}
 		}

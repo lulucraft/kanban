@@ -18,7 +18,7 @@ public class TaskTypeController {
 		if (id == null) return null;
 
 		for (TaskType tt : taskTypes) {
-			if (tt.getId() == id) {
+			if (tt.getId().equals(id)) {
 				return tt;
 			}
 		}

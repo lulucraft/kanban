@@ -18,7 +18,7 @@ public class RankController {
 		if (id == null) return null;
 
 		for (Rank r : ranks) {
-			if (r.getId() == id) {
+			if (r.getId().equals(id)) {
 				return r;
 			}
 		}

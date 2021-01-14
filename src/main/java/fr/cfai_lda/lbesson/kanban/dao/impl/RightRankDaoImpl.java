@@ -64,8 +64,8 @@ public class RightRankDaoImpl implements RightRankDao {
 					rightsRanks.put(rank, rights);
 				}
 			}
+			System.err.println(rightsRanks.get(RankController.getRank(5L)).get(0).getLabel());
 		}
-		System.err.println(rightsRanks.get(RankController.getRank(5L)).get(0).getLabel());
 		return rightsRanks;
 	}
 
