@@ -17,6 +17,9 @@ import fr.cfai_lda.lbesson.kanban.util.DateUtil;
 public class TaskDaoImpl implements TaskDao {
 
 	private Connection connection;
+	private TaskProgressDaoImpl taskProgressDoaImpl = new TaskProgressDaoImpl();
+	private TaskTypeDaoImpl taskTypeDaoImpl = new TaskTypeDaoImpl();
+	private UserDaoImpl userDaoImpl = new UserDaoImpl();
 
 	public TaskDaoImpl() {
 		try {
@@ -77,9 +80,9 @@ public class TaskDaoImpl implements TaskDao {
 		ps.setLong(1, id);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
-			task = new Task(id, rs.getString("name"), new TaskTypeDaoImpl().getTaskTypeById(rs.getLong("tasktype_id")),
-					new TaskProgressDaoImpl().getTaskProgressById(rs.getLong("taskprogress_id")),
-					rs.getDate("creation_date"), new UserDaoImpl().getUserById(rs.getLong("account_id")));
+			task = new Task(id, rs.getString("name"), taskTypeDaoImpl.getTaskTypeById(rs.getLong("tasktype_id")),
+					taskProgressDoaImpl.getTaskProgressById(rs.getLong("taskprogress_id")), rs.getDate("creation_date"),
+					userDaoImpl.getUserById(rs.getLong("account_id")));
 		}
 		return task;
 	}
@@ -90,9 +93,9 @@ public class TaskDaoImpl implements TaskDao {
 		ResultSet rs = connection.prepareStatement(Query.ALL_TASK).executeQuery();
 		while (rs.next()) {
 			tasks.add(new Task(rs.getLong("id"), rs.getString("name"),
-					new TaskTypeDaoImpl().getTaskTypeById(rs.getLong("tasktype_id")),
-					new TaskProgressDaoImpl().getTaskProgressById(rs.getLong("taskprogress_id")),
-					rs.getDate("creation_date"), new UserDaoImpl().getUserById(rs.getLong("account_id"))));
+					taskTypeDaoImpl.getTaskTypeById(rs.getLong("tasktype_id")),
+					taskProgressDoaImpl.getTaskProgressById(rs.getLong("taskprogress_id")), rs.getDate("creation_date"),
+					userDaoImpl.getUserById(rs.getLong("account_id"))));
 		}
 		return tasks;
 	}

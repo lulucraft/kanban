@@ -14,8 +14,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.cfai_lda.lbesson.kanban.business.Task;
 import fr.cfai_lda.lbesson.kanban.business.TaskProgress;
-import fr.cfai_lda.lbesson.kanban.controller.TaskController;
 import fr.cfai_lda.lbesson.kanban.helper.AuthHelper;
+import fr.cfai_lda.lbesson.kanban.manager.TaskController;
 import fr.cfai_lda.lbesson.kanban.util.Checker;
 
 /**

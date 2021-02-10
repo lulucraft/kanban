@@ -16,6 +16,7 @@ import fr.cfai_lda.lbesson.kanban.dao.database.Query;
 public class UserDaoImpl implements UserDao {
 
 	private Connection connection;
+	private RankDaoImpl rankDaoImpl = new RankDaoImpl();
 
 	public UserDaoImpl() {
 		try {
@@ -49,7 +50,7 @@ public class UserDaoImpl implements UserDao {
 		while (rs.next()) {
 			users.add(new User(rs.getLong("id"), rs.getString("firstName"), rs.getString("lastName"),
 					rs.getString("username"), rs.getString("password"),
-					new RankDaoImpl().getRankById(rs.getLong("rank_id"))));
+					rankDaoImpl .getRankById(rs.getLong("rank_id"))));
 		}
 		return users;
 	}
@@ -63,7 +64,7 @@ public class UserDaoImpl implements UserDao {
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			user = new User(id, rs.getString("firstName"), rs.getString("lastName"), rs.getString("username"),
-					rs.getString("password"), new RankDaoImpl().getRankById(rs.getLong("rank_id")));
+					rs.getString("password"), rankDaoImpl.getRankById(rs.getLong("rank_id")));
 		}
 		return user;
 	}

@@ -17,6 +17,9 @@ import fr.cfai_lda.lbesson.kanban.util.DateUtil;
 public class TaskHistoryDaoImpl implements TaskHistoryDao {
 
 	private Connection connection;
+	private TaskDaoImpl taskDaoImpl = new TaskDaoImpl();
+	private TaskProgressDaoImpl taskProgressDaoImpl = new TaskProgressDaoImpl();
+	private UserDaoImpl userDaoImpl = new UserDaoImpl();
 
 	public TaskHistoryDaoImpl() {
 		try {
@@ -48,9 +51,9 @@ public class TaskHistoryDaoImpl implements TaskHistoryDao {
 		ResultSet rs = connection.prepareStatement(Query.ALL_TASK_HISTORY).executeQuery();
 		if (rs.next()) {
 			taskHistory.add(new TaskHistory(rs.getLong("id"), rs.getDate("moving_date"),
-					new TaskDaoImpl().getTaskById(rs.getLong("task_id")),
-					new TaskProgressDaoImpl().getTaskProgressById(rs.getLong("taskprogress_id")),
-					new UserDaoImpl().getUserById(rs.getLong("account_id"))));
+					taskDaoImpl .getTaskById(rs.getLong("task_id")),
+					taskProgressDaoImpl.getTaskProgressById(rs.getLong("taskprogress_id")),
+					userDaoImpl.getUserById(rs.getLong("account_id"))));
 		}
 		return taskHistory;
 	}
@@ -63,9 +66,9 @@ public class TaskHistoryDaoImpl implements TaskHistoryDao {
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			taskHistory = new TaskHistory(id, rs.getDate("moving_date"),
-					new TaskDaoImpl().getTaskById(rs.getLong("task_id")),
-					new TaskProgressDaoImpl().getTaskProgressById(rs.getLong("taskprogress_id")),
-					new UserDaoImpl().getUserById(rs.getLong("user_id")));
+					taskDaoImpl.getTaskById(rs.getLong("task_id")),
+					taskProgressDaoImpl .getTaskProgressById(rs.getLong("taskprogress_id")),
+					userDaoImpl.getUserById(rs.getLong("user_id")));
 		}
 		return taskHistory;
 	}

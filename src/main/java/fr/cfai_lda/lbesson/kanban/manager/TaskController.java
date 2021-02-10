@@ -1,4 +1,4 @@
-package fr.cfai_lda.lbesson.kanban.controller;
+package fr.cfai_lda.lbesson.kanban.manager;
 
 import java.util.ArrayList;
 import java.util.Date;

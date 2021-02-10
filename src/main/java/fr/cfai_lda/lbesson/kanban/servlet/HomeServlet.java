@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.cfai_lda.lbesson.kanban.controller.DataController;
-import fr.cfai_lda.lbesson.kanban.controller.UserController;
 import fr.cfai_lda.lbesson.kanban.helper.AuthHelper;
+import fr.cfai_lda.lbesson.kanban.manager.DataController;
+import fr.cfai_lda.lbesson.kanban.manager.UserController;
 
 /**
  * Servlet implementation class HomeServlet

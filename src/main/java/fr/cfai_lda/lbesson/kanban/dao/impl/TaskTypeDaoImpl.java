@@ -16,6 +16,7 @@ import fr.cfai_lda.lbesson.kanban.dao.database.Query;
 public class TaskTypeDaoImpl implements TaskTypeDao {
 
 	private Connection connection;
+	private ColorDaoImpl colorDaoImpl = new ColorDaoImpl();
 
 	public TaskTypeDaoImpl() {
 		try {
@@ -44,7 +45,8 @@ public class TaskTypeDaoImpl implements TaskTypeDao {
 		List<TaskType> taskTypes = new ArrayList<>();
 		ResultSet rs = connection.prepareStatement(Query.ALL_TASK_TYPES).executeQuery();
 		while (rs.next()) {
-			taskTypes.add(new TaskType(rs.getLong("id"), rs.getString("label"), new ColorDaoImpl().getColorById(rs.getLong("color_id"))));
+			taskTypes.add(new TaskType(rs.getLong("id"), rs.getString("label"),
+					colorDaoImpl.getColorById(rs.getLong("color_id"))));
 		}
 		return taskTypes;
 	}
@@ -57,7 +59,8 @@ public class TaskTypeDaoImpl implements TaskTypeDao {
 		TaskType taskType = null;
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
-			taskType = new TaskType(rs.getLong("id"), rs.getString("label"), new ColorDaoImpl().getColorById(rs.getLong("color_id")));
+			taskType = new TaskType(rs.getLong("id"), rs.getString("label"),
+					colorDaoImpl.getColorById(rs.getLong("color_id")));
 		}
 		return taskType;
 	}

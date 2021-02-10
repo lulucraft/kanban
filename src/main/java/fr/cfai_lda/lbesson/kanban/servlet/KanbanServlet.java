@@ -15,14 +15,14 @@ import fr.cfai_lda.lbesson.kanban.business.Task;
 import fr.cfai_lda.lbesson.kanban.business.TaskHistory;
 import fr.cfai_lda.lbesson.kanban.business.TaskProgress;
 import fr.cfai_lda.lbesson.kanban.business.User;
-import fr.cfai_lda.lbesson.kanban.controller.RightController;
-import fr.cfai_lda.lbesson.kanban.controller.TaskController;
-import fr.cfai_lda.lbesson.kanban.controller.TaskProgressController;
-import fr.cfai_lda.lbesson.kanban.controller.TaskTypeController;
-import fr.cfai_lda.lbesson.kanban.controller.UserController;
 import fr.cfai_lda.lbesson.kanban.dao.impl.TaskDaoImpl;
 import fr.cfai_lda.lbesson.kanban.dao.impl.TaskHistoryDaoImpl;
 import fr.cfai_lda.lbesson.kanban.helper.AuthHelper;
+import fr.cfai_lda.lbesson.kanban.manager.RightController;
+import fr.cfai_lda.lbesson.kanban.manager.TaskController;
+import fr.cfai_lda.lbesson.kanban.manager.TaskProgressController;
+import fr.cfai_lda.lbesson.kanban.manager.TaskTypeController;
+import fr.cfai_lda.lbesson.kanban.manager.UserController;
 import fr.cfai_lda.lbesson.kanban.util.Checker;
 
 /**
@@ -66,10 +66,9 @@ public class KanbanServlet extends HttpServlet {
 			if (req.getParameter("move") != null) {
 				// Check user rights
 				Right right = RightController.getRight("MOVE_TASK");
-				if (right != null || !user.getRank().getRights().contains(right)) {
+				if (right != null && !user.getRank().getRights().contains(right)) {
 					return;
 				}
-
 				// Move task
 				TaskHistory taskHistory = TaskController.moveTask(req.getParameter("move"), req.getParameter("progress"), user);
 				if (taskHistory == null) return;

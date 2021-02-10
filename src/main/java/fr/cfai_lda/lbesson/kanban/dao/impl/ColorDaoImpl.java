@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.cfai_lda.lbesson.kanban.business.Color;
-import fr.cfai_lda.lbesson.kanban.controller.ColorController;
 import fr.cfai_lda.lbesson.kanban.dao.ColorDao;
 import fr.cfai_lda.lbesson.kanban.dao.database.DatabaseConnection;
 import fr.cfai_lda.lbesson.kanban.dao.database.Query;
+import fr.cfai_lda.lbesson.kanban.manager.ColorController;
 
 public class ColorDaoImpl implements ColorDao {
 

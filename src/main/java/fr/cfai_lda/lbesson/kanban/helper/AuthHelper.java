@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.cfai_lda.lbesson.kanban.business.Token;
 import fr.cfai_lda.lbesson.kanban.business.User;
-import fr.cfai_lda.lbesson.kanban.controller.UserController;
+import fr.cfai_lda.lbesson.kanban.manager.UserController;
 
 public class AuthHelper {
 

@@ -1,4 +1,4 @@
-package fr.cfai_lda.lbesson.kanban.controller;
+package fr.cfai_lda.lbesson.kanban.manager;
 
 import fr.cfai_lda.lbesson.kanban.business.User;
 import fr.cfai_lda.lbesson.kanban.helper.AuthHelper;
