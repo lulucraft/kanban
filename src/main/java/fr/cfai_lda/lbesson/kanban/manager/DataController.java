@@ -14,8 +14,10 @@ import fr.cfai_lda.lbesson.kanban.dao.ColorDao;
 import fr.cfai_lda.lbesson.kanban.dao.RankDao;
 import fr.cfai_lda.lbesson.kanban.dao.RightDao;
 import fr.cfai_lda.lbesson.kanban.dao.RightRankDao;
+import fr.cfai_lda.lbesson.kanban.dao.TaskDao;
 import fr.cfai_lda.lbesson.kanban.dao.TaskProgressDao;
 import fr.cfai_lda.lbesson.kanban.dao.TaskTypeDao;
+import fr.cfai_lda.lbesson.kanban.dao.UserDao;
 import fr.cfai_lda.lbesson.kanban.dao.impl.ColorDaoImpl;
 import fr.cfai_lda.lbesson.kanban.dao.impl.RankDaoImpl;
 import fr.cfai_lda.lbesson.kanban.dao.impl.RightDaoImpl;
@@ -26,6 +28,15 @@ import fr.cfai_lda.lbesson.kanban.dao.impl.TaskTypeDaoImpl;
 import fr.cfai_lda.lbesson.kanban.dao.impl.UserDaoImpl;
 
 public class DataController {
+
+	private static RightRankDao rightRankDaoImpl = new RightRankDaoImpl();
+	private static RightDao rightDaoImpl = new RightDaoImpl();
+	private static ColorDao colorDaoImpl = new ColorDaoImpl();
+	private static TaskProgressDao taskProgressDaoImpl = new TaskProgressDaoImpl();
+	private static TaskTypeDao taskTypeDaoImpl = new TaskTypeDaoImpl();
+	private static UserDao userDaoImpl = new UserDaoImpl();
+	private static TaskDao taskDaoImpl = new TaskDaoImpl();
+	private static RankDao rankDaoImpl = new RankDaoImpl();
 
 	public static void loadData() throws SQLException {
 		// Load ranks
@@ -58,15 +69,14 @@ public class DataController {
 	 * @throws SQLException
 	 */
 	public static void loadRanks() throws SQLException {
-		for (Rank r : new RankDaoImpl().getAllRanks()) {
+		for (Rank r : rankDaoImpl.getAllRanks()) {
 			RankController.createRank(r.getId(), r.getRankName());
 		}
 
 		// Create default ranks in database
 		if (RankController.getAllRanks().isEmpty()) {
-			RankDao rankDao = new RankDaoImpl();
-			rankDao.createRank(new Rank("ADMIN"));
-			rankDao.createRank(new Rank("DEV"));
+			rankDaoImpl.createRank(new Rank("ADMIN"));
+			rankDaoImpl.createRank(new Rank("DEV"));
 		}
 	}
 
@@ -76,16 +86,15 @@ public class DataController {
 	 * @throws SQLException
 	 */
 	public static void loadRights() throws SQLException {
-		for (Right r : new RightDaoImpl().getAllRights()) {
+		for (Right r : rightDaoImpl.getAllRights()) {
 			RightController.createRight(r.getId(), r.getLabel());
 		}
 
 		// Create default rights in database
 		if (RightController.getAllRights().isEmpty()) {
-			RightDao rightDao = new RightDaoImpl();
-			rightDao.createRight(new Right("CREATE_TASK"));
-			rightDao.createRight(new Right("MOVE_TASK"));
-			rightDao.createRight(new Right("SHOW_TASK"));
+			rightDaoImpl.createRight(new Right("CREATE_TASK"));
+			rightDaoImpl.createRight(new Right("MOVE_TASK"));
+			rightDaoImpl.createRight(new Right("SHOW_TASK"));
 		}
 	}
 
@@ -96,7 +105,7 @@ public class DataController {
 	 */
 	public static void loadRightsRanks() throws SQLException {
 		boolean b = true;
-		for (Rank r : new RightRankDaoImpl().getAllRanksWithRights()) {
+		for (Rank r : rightRankDaoImpl .getAllRanksWithRights()) {
 			for (Right ri : r.getRights()) {
 				RankController.addRankRight(r.getId(), ri);
 				b = false;
@@ -104,17 +113,16 @@ public class DataController {
 		}
 
 		if (b) {
-			RightRankDao rightRankDao = new RightRankDaoImpl();
 			Rank rank = RankController.getRank("ADMIN");
 			if (rank != null) {
-				rightRankDao.assignRightToRank(RightController.getRight("CREATE_TASK"), rank);
-				rightRankDao.assignRightToRank(RightController.getRight("MOVE_TASK"), rank);
-				rightRankDao.assignRightToRank(RightController.getRight("SHOW_TASK"), rank);
+				rightRankDaoImpl.assignRightToRank(RightController.getRight("CREATE_TASK"), rank);
+				rightRankDaoImpl.assignRightToRank(RightController.getRight("MOVE_TASK"), rank);
+				rightRankDaoImpl.assignRightToRank(RightController.getRight("SHOW_TASK"), rank);
 			}
 			rank = RankController.getRank("DEV");
 			if (rank != null) {
-				rightRankDao.assignRightToRank(RightController.getRight("MOVE_TASK"), rank);
-				rightRankDao.assignRightToRank(RightController.getRight("SHOW_TASK"), rank);
+				rightRankDaoImpl.assignRightToRank(RightController.getRight("MOVE_TASK"), rank);
+				rightRankDaoImpl.assignRightToRank(RightController.getRight("SHOW_TASK"), rank);
 			}
 		}
 	}
@@ -125,14 +133,13 @@ public class DataController {
 	 * @throws SQLException
 	 */
 	private static void loadColors() throws SQLException {
-		for (Color c : new ColorDaoImpl().getAllColors()) {
+		for (Color c : colorDaoImpl.getAllColors()) {
 			ColorController.createColor(c.getId(), c.getLabel(), c.getRGBColor());
 		}
 
 		// Create default colors in database
 		if (ColorController.getAllColors().isEmpty()) {
-			ColorDao colorDao = new ColorDaoImpl();
-			colorDao.createColor(new Color("BLUE", new RGBColor(0, 0, 255)));
+			colorDaoImpl.createColor(new Color("BLUE", new RGBColor(0, 0, 255)));
 		}
 	}
 
@@ -142,17 +149,16 @@ public class DataController {
 	 * @throws SQLException
 	 */
 	public static void loadTaskTypes() throws SQLException {
-		for (TaskType tt : new TaskTypeDaoImpl().getAllTaskTypes()) {
+		for (TaskType tt : taskTypeDaoImpl.getAllTaskTypes()) {
 			TaskTypeController.createTaskType(tt.getId(), tt.getLabel(), tt.getColor());
 		}
 
 		// Create default tasktypes in database
 		if (TaskTypeController.getAllTaskTypes().isEmpty()) {
-			TaskTypeDao taskTypeDao = new TaskTypeDaoImpl();
-			taskTypeDao.createTaskType(new TaskType("FEATURE", ColorController.getColor("BLUE")));
-			taskTypeDao.createTaskType(new TaskType("BUG", ColorController.getColor("ORANGE")));
-			taskTypeDao.createTaskType(new TaskType("IMPROVEMENT", ColorController.getColor("GREEN")));
-			taskTypeDao.createTaskType(new TaskType("EXPLORATION_TASK", ColorController.getColor("MAGENTA")));
+			taskTypeDaoImpl.createTaskType(new TaskType("FEATURE", ColorController.getColor("BLUE")));
+			taskTypeDaoImpl.createTaskType(new TaskType("BUG", ColorController.getColor("ORANGE")));
+			taskTypeDaoImpl.createTaskType(new TaskType("IMPROVEMENT", ColorController.getColor("GREEN")));
+			taskTypeDaoImpl.createTaskType(new TaskType("EXPLORATION_TASK", ColorController.getColor("MAGENTA")));
 		}
 	}
 
@@ -162,16 +168,15 @@ public class DataController {
 	 * @throws SQLException
 	 */
 	public static void loadTaskProgress() throws SQLException {
-		for (TaskProgress tp : new TaskProgressDaoImpl().getAllTaskProgress()) {
+		for (TaskProgress tp : taskProgressDaoImpl.getAllTaskProgress()) {
 			TaskProgressController.createTaskProgress(tp.getId(), tp.getLabel());
 		}
 
 		// Create default taskprogress in database
 		if (TaskProgressController.getAllTaskProgress().isEmpty()) {
-			TaskProgressDao taskProgressDao = new TaskProgressDaoImpl();
-			taskProgressDao.createTaskProgress(new TaskProgress("To-Do"));
-			taskProgressDao.createTaskProgress(new TaskProgress("Work-In-Progress"));
-			taskProgressDao.createTaskProgress(new TaskProgress("Validate"));
+			taskProgressDaoImpl.createTaskProgress(new TaskProgress("To-Do"));
+			taskProgressDaoImpl.createTaskProgress(new TaskProgress("Work-In-Progress"));
+			taskProgressDaoImpl.createTaskProgress(new TaskProgress("Validate"));
 		}
 	}
 
@@ -181,14 +186,14 @@ public class DataController {
 	 * @throws SQLException
 	 */
 	public static void loadUsers() throws SQLException {
-		for (User u : new UserDaoImpl().getAllUsers()) {
+		for (User u : userDaoImpl.getAllUsers()) {
 			UserController.createUser(u.getId(), u.getFirstName(), u.getLastName(), u.getUsername(), u.getPassword(),
 					RankController.getRank(u.getRank().getId()));
 		}
 
 		// Create default users in database
 		//		if (UserController.getAllUsers().isEmpty()) {
-		//			UserDao userDao = new UserDaoImpl();
+		//			UserDao userDao = userDaoImpl;
 		//			userDao.createUser(UserController.createUser(null, "Lucas", "Besson", AuthController.hashPassword("lbesson"), "123456",
 		//					RankController.getRank(5L)));
 		//			userDao.createUser(UserController.createUser(null, "admintest", "test", AuthController.hashPassword("admin"), "root",
@@ -202,7 +207,7 @@ public class DataController {
 	 * @throws SQLException
 	 */
 	public static void loadTasks() throws SQLException {
-		for (Task t : new TaskDaoImpl().getAllTasks()) {
+		for (Task t : taskDaoImpl .getAllTasks()) {
 			TaskController.createTask(t.getId(), t.getName(), t.getTaskType(), t.getTaskProgress(), t.getCreationDate(),
 					t.getTaskOwner());
 		}
