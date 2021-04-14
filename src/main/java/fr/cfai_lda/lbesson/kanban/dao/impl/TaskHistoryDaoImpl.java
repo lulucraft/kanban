@@ -38,7 +38,7 @@ public class TaskHistoryDaoImpl implements TaskHistoryDao {
 		ps.setLong(4, taskHistory.getTaskUpdateUser().getId());
 		ps.executeUpdate();
 
-		// Get generate new id
+		// Get the new generate id
 		ResultSet rs = ps.getGeneratedKeys();
 		rs.next();
 		taskHistory.setId(rs.getLong(1));

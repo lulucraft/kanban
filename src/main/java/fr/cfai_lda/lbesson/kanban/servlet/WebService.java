@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.cfai_lda.lbesson.kanban.business.Task;
 import fr.cfai_lda.lbesson.kanban.business.TaskProgress;
 import fr.cfai_lda.lbesson.kanban.helper.AuthHelper;
-import fr.cfai_lda.lbesson.kanban.manager.TaskController;
+import fr.cfai_lda.lbesson.kanban.manager.TaskManager;
 import fr.cfai_lda.lbesson.kanban.util.Checker;
 
 /**
@@ -49,13 +49,13 @@ public class WebService extends HttpServlet {
 				if (!Checker.isInteger(task_id)) return;
 
 				long taskId = Integer.parseInt(task_id);
-				Task task = TaskController.getTask(taskId);
+				Task task = TaskManager.getTask(taskId);
 				if (task == null) return;
 
 				// Send object as string
 				resp.getWriter().append(mapper.writeValueAsString(task));
 			} else {
-				Task task = TaskController.getLastTask();
+				Task task = TaskManager.getLastTask();
 				if (task == null) return;
 
 				resp.getWriter().append(mapper.writeValueAsString(task));

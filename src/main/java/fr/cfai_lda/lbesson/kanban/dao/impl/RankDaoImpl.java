@@ -31,7 +31,7 @@ public class RankDaoImpl implements RankDao {
 		ps.setString(1, rank.getRankName());
 		ps.executeUpdate();
 
-		// Get generate new id
+		// Get the new generated id
 		ResultSet rs = ps.getGeneratedKeys();
 		rs.next();
 		rank.setId(rs.getLong(1));

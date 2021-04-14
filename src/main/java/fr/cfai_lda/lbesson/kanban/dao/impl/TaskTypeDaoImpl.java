@@ -33,7 +33,7 @@ public class TaskTypeDaoImpl implements TaskTypeDao {
 		ps.setLong(2, taskType.getColor().getId());
 		ps.executeUpdate();
 
-		// Get generate new id
+		// Get the new generate id
 		ResultSet rs = ps.getGeneratedKeys();
 		rs.next();
 		taskType.setId(rs.getLong(1));

@@ -1,7 +1,6 @@
 package fr.cfai_lda.lbesson.kanban.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.cfai_lda.lbesson.kanban.business.User;
-import fr.cfai_lda.lbesson.kanban.helper.AuthHelper;
-import fr.cfai_lda.lbesson.kanban.manager.AuthController;
-import fr.cfai_lda.lbesson.kanban.manager.UserController;
+import fr.cfai_lda.lbesson.kanban.manager.AuthManager;
 
 /**
  * Servlet implementation class ConnectionServlet
@@ -32,16 +29,6 @@ public class ConnectionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
-			if (AuthHelper.checkConnection(req, resp, false)) {
-				User user = UserController.getUser((long) req.getSession().getAttribute("user_id"));
-				// Disconnect user
-				AuthController.disconnectUser(user);
-				req.getSession().setAttribute("token", null);
-			}
-		} catch (SQLException | ServletException | IOException e) {
-			e.printStackTrace();
-		}
 		req.getRequestDispatcher("WEB-INF/connection.jsp").forward(req, resp);
 	}
 
@@ -58,7 +45,7 @@ public class ConnectionServlet extends HttpServlet {
 		} else if (password == null || password.isBlank()) {
 			req.setAttribute("error", "Veuillez entrer un mot de passe");
 		} else {
-			User user = AuthController.connectUser(username, password);
+			User user = AuthManager.connectUser(username, password);
 			if (user != null) {
 				req.getSession().setAttribute("user_id", user.getId());
 				req.getSession().setAttribute("token", user.getToken().getToken());

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.cfai_lda.lbesson.kanban.business.Token;
 import fr.cfai_lda.lbesson.kanban.business.User;
-import fr.cfai_lda.lbesson.kanban.manager.UserController;
+import fr.cfai_lda.lbesson.kanban.manager.UserManager;
 
 public class AuthHelper {
 
@@ -28,7 +28,7 @@ public class AuthHelper {
 		}
 
 		// Get user
-		User user = UserController.getUser((long) session.getAttribute("user_id"));
+		User user = UserManager.getUser((long) session.getAttribute("user_id"));
 		if (user == null) return false;
 
 		// Get user token

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.cfai_lda.lbesson.kanban.helper.AuthHelper;
-import fr.cfai_lda.lbesson.kanban.manager.DataController;
-import fr.cfai_lda.lbesson.kanban.manager.UserController;
+import fr.cfai_lda.lbesson.kanban.manager.DataManager;
+import fr.cfai_lda.lbesson.kanban.manager.UserManager;
 
 /**
  * Servlet implementation class HomeServlet
@@ -26,7 +26,7 @@ public class HomeServlet extends HttpServlet {
 	public HomeServlet() {
 		super();
 		try {
-			DataController.loadData();
+			DataManager.loadData();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -42,7 +42,7 @@ public class HomeServlet extends HttpServlet {
 			if (!AuthHelper.checkConnection(req, resp)) return;
 
 			// If connected
-			String username = UserController.getUser((long) req.getSession().getAttribute("user_id")).getUsername();
+			String username = UserManager.getUser((long) req.getSession().getAttribute("user_id")).getUsername();
 			req.setAttribute("username", username);
 			req.getRequestDispatcher("WEB-INF/home.jsp").forward(req, resp);
 

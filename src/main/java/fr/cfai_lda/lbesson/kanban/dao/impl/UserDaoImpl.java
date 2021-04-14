@@ -36,11 +36,23 @@ public class UserDaoImpl implements UserDao {
 		ps.setLong(5, user.getRank().getId());
 		ps.executeUpdate();
 
-		// Get generate new id
+		// Get the new generate id
 		ResultSet rs = ps.getGeneratedKeys();
 		rs.next();
 		user.setId(rs.getLong(1));
 		return user;
+	}
+
+	@Override
+	public void updateUser(User user) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(Query.UPDATE_USER);
+		ps.setString(1, user.getFirstName());
+		ps.setString(2, user.getLastName());
+		ps.setString(3, user.getUsername());
+		ps.setString(4, user.getPassword());
+		ps.setLong(5, user.getRank().getId());
+		ps.setLong(6, user.getId());
+		ps.executeUpdate();
 	}
 
 	@Override
@@ -50,7 +62,7 @@ public class UserDaoImpl implements UserDao {
 		while (rs.next()) {
 			users.add(new User(rs.getLong("id"), rs.getString("firstName"), rs.getString("lastName"),
 					rs.getString("username"), rs.getString("password"),
-					rankDaoImpl .getRankById(rs.getLong("rank_id"))));
+					rankDaoImpl.getRankById(rs.getLong("rank_id"))));
 		}
 		return users;
 	}

@@ -6,7 +6,7 @@
     <head>
         <title>Connexion</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="/kanban/css/style.css">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
     </head>
     <body>
     	<div id="center" class="frame">

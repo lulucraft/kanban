@@ -12,7 +12,7 @@ import fr.cfai_lda.lbesson.kanban.business.Color;
 import fr.cfai_lda.lbesson.kanban.dao.ColorDao;
 import fr.cfai_lda.lbesson.kanban.dao.database.DatabaseConnection;
 import fr.cfai_lda.lbesson.kanban.dao.database.Query;
-import fr.cfai_lda.lbesson.kanban.manager.ColorController;
+import fr.cfai_lda.lbesson.kanban.manager.ColorManager;
 
 public class ColorDaoImpl implements ColorDao {
 
@@ -33,7 +33,7 @@ public class ColorDaoImpl implements ColorDao {
 		ps.setString(2, color.getRGBColor().getString());
 		ps.executeUpdate();
 
-		// Get generate new id
+		// Get the new generate id
 		ResultSet rs = ps.getGeneratedKeys();
 		rs.next();
 		color.setId(rs.getLong(1));
@@ -46,7 +46,7 @@ public class ColorDaoImpl implements ColorDao {
 		ResultSet rs = connection.prepareStatement(Query.ALL_COLORS).executeQuery();
 		while (rs.next()) {
 			colors.add(new Color(rs.getLong("id"), rs.getString("label"),
-					ColorController.translateToRGBColor(rs.getString("rgbcode"))));
+					ColorManager.translateToRGBColor(rs.getString("rgbcode"))));
 		}
 		return colors;
 	}
@@ -59,7 +59,7 @@ public class ColorDaoImpl implements ColorDao {
 		Color color = null;
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
-			color = new Color(id, rs.getString("label"), ColorController.translateToRGBColor(rs.getString("rgbcode")));
+			color = new Color(id, rs.getString("label"), ColorManager.translateToRGBColor(rs.getString("rgbcode")));
 		}
 		return color;
 	}

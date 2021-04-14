@@ -31,7 +31,7 @@ public class TaskProgressDaoImpl implements TaskProgressDao {
 		ps.setString(1, taskProgress.getLabel());
 		ps.executeUpdate();
 
-		// Get generate new id
+		// Get the new generate id
 		ResultSet rs = ps.getGeneratedKeys();
 		rs.next();
 		taskProgress.setId(rs.getLong(1));

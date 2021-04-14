@@ -41,7 +41,7 @@ public class RightDaoImpl implements RightDao {
 		ps.setString(1, right.getLabel());
 		ps.executeUpdate();
 
-		// Get generate new id
+		// Get the new generate id
 		ResultSet rs = ps.getGeneratedKeys();
 		rs.next();
 		right.setId(rs.getLong(1));

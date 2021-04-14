@@ -39,7 +39,7 @@ public class TaskDaoImpl implements TaskDao {
 		ps.setLong(5, task.getTaskProgress().getId());
 		ps.executeUpdate();
 
-		// Get generate new id
+		// Get the new generate id
 		ResultSet rs = ps.getGeneratedKeys();
 		rs.next();
 		task.setId(rs.getLong(1));

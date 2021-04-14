@@ -1,44 +1,53 @@
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\HomeServlet.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\TaskDao.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\User.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\TaskProgressDaoImpl.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\TaskHistory.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\TaskHistoryDao.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\Task.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\controller\ColorController.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\controller\TaskHistoryController.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\UserDaoImpl.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\helper\AuthHelper.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\controller\DataController.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\RankDaoImpl.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\RGBColor.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\IndexServlet.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\controller\TaskProgressController.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\controller\AuthController.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\TaskHistoryDaoImpl.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\KanbanServlet.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\controller\TaskController.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\database\DatabaseConnection.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\Rank.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\UserDao.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\util\BCrypt.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\controller\UserController.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\TaskProgressDao.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\ColorDaoImpl.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\controller\TaskTypeController.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\util\Checker.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\controller\RankController.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\Color.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\TaskTypeDaoImpl.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\helper\UpdatableBCryptHelper.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\database\Query.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\ConnectionServlet.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\ColorDao.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\TaskDaoImpl.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\Token.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\RankDao.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\WebService.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\TaskProgress.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\util\DateUtil.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\TaskType.java
-E:\Users\ProCZ\Desktop\JEUX - PLUGINS\ECLIPSE ENTREPRISE\PROJECTS\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\TaskTypeDao.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\User.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\RGBColor.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\helper\AuthHelper.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\UserDao.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\TaskHistory.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\manager\TaskTypeController.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\Task.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\HomeServlet.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\IndexServlet.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\RightDaoImpl.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\manager\AuthController.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\Color.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\util\BCrypt.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\RankDaoImpl.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\ConnectionServlet.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\WebService.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\KanbanServlet.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\TaskProgressDao.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\TaskProgress.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\TaskDao.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\TaskTypeDao.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\TaskTypeDaoImpl.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\RightDao.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\manager\RightController.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\RightRankDaoImpl.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\helper\UpdatableBCryptHelper.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\manager\UserController.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\ColorDaoImpl.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\util\DateUtil.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\TaskHistoryDao.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\UserDaoImpl.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\TaskHistoryDaoImpl.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\manager\TaskHistoryController.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\manager\DataController.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\TaskType.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\RankDao.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\LogoutServlet.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\database\DatabaseConnection.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\manager\TaskController.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\Rank.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\AdminServlet.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\Token.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\RightRankDao.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\database\Query.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\util\Checker.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\TaskProgressDaoImpl.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\business\Right.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\servlet\EditUserServlet.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\impl\TaskDaoImpl.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\manager\RankController.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\manager\ColorController.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\dao\ColorDao.java
+D:\Users\lucas\Bureau\DEV\JAVA\Java Projects EE\kanban\src\main\java\fr\cfai_lda\lbesson\kanban\manager\TaskProgressController.java
