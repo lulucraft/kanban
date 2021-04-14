@@ -8,19 +8,6 @@
 		<title>Espace d'administration</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
-
-		<!--  <script type="text/javascript">
-			function editUser() {
-				var id = event.srcElement.id;
-
-				var xhr = new XMLHttpRequest();
-				xhr.open("POST", 'admin', true);
-				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				xhr.send("edit=" + id);
-
-				alert(id);
-			}
-		</script>-->
 	</head>
 	<body class="kanban-background">
 		<div id="center">

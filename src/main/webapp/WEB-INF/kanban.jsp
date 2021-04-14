@@ -138,7 +138,7 @@
 
   				var xhr = new XMLHttpRequest();
   				xhr.open("POST", 'api', true);
-//   				xhr.setRequestHeader("Content-Type", "application/json");
+//   			xhr.setRequestHeader("Content-Type", "application/json");
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
    				xhr.overrideMimeType("application/json");
   				xhr.onload = function() {
