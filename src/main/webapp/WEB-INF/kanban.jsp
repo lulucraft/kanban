@@ -152,6 +152,7 @@
 							document.getElementById('task-details-task_owner_lastname').innerHTML = '<b>Nom de famille du créateur :</b> ' + jsonResponse.taskOwner.lastName.htmlEscape();
 							document.getElementById('task-details-task_type').innerHTML = '<b>Type de tâche :</b> ' + jsonResponse.taskType.label.htmlEscape();
 							document.getElementById('task-details-task_progress').innerHTML = '<b>Progression :</b> ' + jsonResponse.taskProgress.label.htmlEscape();
+							document.getElementById('task-details-task_last_move').innerHTML = '<b>Dernier déplacement :</b> ' + jsonResponse.taskProgress.label.htmlEscape();
   						}
   					}
   				};

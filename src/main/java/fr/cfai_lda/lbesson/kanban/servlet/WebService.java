@@ -53,11 +53,13 @@ public class WebService extends HttpServlet {
 				if (task == null) return;
 
 				// Send object as string
+				resp.setCharacterEncoding("UTF-8");
 				resp.getWriter().append(mapper.writeValueAsString(task));
 			} else {
 				Task task = TaskManager.getLastTask();
 				if (task == null) return;
 
+				resp.setCharacterEncoding("UTF-8");
 				resp.getWriter().append(mapper.writeValueAsString(task));
 			}
 		} catch (SQLException | ServletException | IOException e) {

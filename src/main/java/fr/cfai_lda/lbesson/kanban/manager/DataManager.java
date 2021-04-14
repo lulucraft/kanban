@@ -95,6 +95,8 @@ public class DataManager {
 			rightDaoImpl.createRight(new Right("CREATE_TASK"));
 			rightDaoImpl.createRight(new Right("MOVE_TASK"));
 			rightDaoImpl.createRight(new Right("SHOW_TASK"));
+			rightDaoImpl.createRight(new Right("MANAGE_USERS"));
+			rightDaoImpl.createRight(new Right("UPDATE_USER"));
 		}
 	}
 
@@ -118,6 +120,8 @@ public class DataManager {
 				rightRankDaoImpl.assignRightToRank(RightManager.getRight("CREATE_TASK"), rank);
 				rightRankDaoImpl.assignRightToRank(RightManager.getRight("MOVE_TASK"), rank);
 				rightRankDaoImpl.assignRightToRank(RightManager.getRight("SHOW_TASK"), rank);
+				rightRankDaoImpl.assignRightToRank(RightManager.getRight("MANAGE_USERS"), rank);
+				rightRankDaoImpl.assignRightToRank(RightManager.getRight("UPDATE_USER"), rank);
 			}
 			rank = RankManager.getRank("DEV");
 			if (rank != null) {
@@ -139,7 +143,10 @@ public class DataManager {
 
 		// Create default colors in database
 		if (ColorManager.getAllColors().isEmpty()) {
-			colorDaoImpl.createColor(new Color("BLUE", new RGBColor(0, 0, 255)));
+			colorDaoImpl.createColor(new Color("BLUE", new RGBColor(30, 144, 255)));
+			colorDaoImpl.createColor(new Color("ORANGE", new RGBColor(255, 196, 30)));
+			colorDaoImpl.createColor(new Color("GREEN", new RGBColor(0, 128, 0)));
+			colorDaoImpl.createColor(new Color("MAGENTA", new RGBColor(204, 0, 255)));
 		}
 	}
 
@@ -175,8 +182,9 @@ public class DataManager {
 		// Create default taskprogress in database
 		if (TaskProgressManager.getAllTaskProgress().isEmpty()) {
 			taskProgressDaoImpl.createTaskProgress(new TaskProgress("To-Do"));
-			taskProgressDaoImpl.createTaskProgress(new TaskProgress("Work-In-Progress"));
-			taskProgressDaoImpl.createTaskProgress(new TaskProgress("Validate"));
+			taskProgressDaoImpl.createTaskProgress(new TaskProgress("In-Progress"));
+			taskProgressDaoImpl.createTaskProgress(new TaskProgress("To-Verify"));
+			taskProgressDaoImpl.createTaskProgress(new TaskProgress("Done"));
 		}
 	}
 
@@ -190,6 +198,10 @@ public class DataManager {
 			UserManager.createUser(u.getId(), u.getFirstName(), u.getLastName(), u.getUsername(), u.getPassword(),
 					RankManager.getRank(u.getRank().getId()));
 		}
+//		UserDao userDao = userDaoImpl;
+//		userDao.createUser(UserManager.createUser(null, "admintest", "test", "dev1", AuthManager.hashPassword("12345"), RankManager.getRank(5L)));
+//		userDao.createUser(UserManager.createUser(null, "admintest", "test", "dev2", AuthManager.hashPassword("12345"), RankManager.getRank(5L)));
+//		userDao.createUser(UserManager.createUser(null, "admintest", "test", "admin", AuthManager.hashPassword("12345"), RankManager.getRank(6L)));
 
 		// Create default users in database
 		//		if (UserController.getAllUsers().isEmpty()) {
